@@ -1,0 +1,379 @@
+// Surya Yantra — Complete Database Schema
+// IEC 60891:2021 | IEC 60904 | IEC 61853 | ESL-Solar 500
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ModuleTechnology {
+  MONO_PERC
+  BIFACIAL_PERC
+  HJT
+  HPBC
+  IBC
+  TOPCon
+  PEROVSKITE
+  THIN_FILM_CIGS
+  THIN_FILM_CDTE
+  TANDEM
+}
+
+enum LoadMode {
+  CC
+  CV
+  CR
+  CP
+  MPP_TRACK
+  MPP_SCAN
+  IV_SWEEP
+}
+
+enum TestStatus {
+  QUEUED
+  RUNNING
+  COMPLETED
+  FAILED
+  ABORTED
+  CALIBRATING
+}
+
+enum MuxDestination {
+  ELOAD
+  INVERTER
+  CONVERTER
+  IDLE
+}
+
+enum CorrectionProcedure {
+  IEC60891_P1
+  IEC60891_P2
+  IEC60891_P3
+  IEC60891_P4
+  NONE
+}
+
+enum InterfaceType {
+  USB
+  RS232
+  ETHERNET
+}
+
+enum UserRole {
+  ADMIN
+  ENGINEER
+  OPERATOR
+  VIEWER
+}
+
+model Organization {
+  id          String   @id @default(cuid())
+  name        String   @default("Srishti PV Lab")
+  address     String?
+  labCode     String   @unique @default("SPL-001")
+  accredBody  String?
+  logoUrl     String?
+  createdAt   DateTime @default(now())
+  testBeds    TestBed[]
+  users       User[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  role      UserRole @default(OPERATOR)
+  orgId     String
+  org       Organization @relation(fields: [orgId], references: [id])
+  createdAt DateTime @default(now())
+  sessions  TestSession[]
+  reports   Report[]
+}
+
+model Manufacturer {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  country     String?
+  website     String?
+  moduleTypes ModuleType[]
+}
+
+model ModuleType {
+  id             String           @id @default(cuid())
+  manufacturerId String
+  manufacturer   Manufacturer     @relation(fields: [manufacturerId], references: [id])
+  modelName      String
+  technology     ModuleTechnology
+  bifaciality    Float?
+  // STC Ratings (IEC 61215 nameplate)
+  pmpSTC         Float
+  vocSTC         Float
+  iscSTC         Float
+  vmppSTC        Float
+  imppSTC        Float
+  ffSTC          Float
+  etaSTC         Float
+  areaMm2        Float
+  // Temperature Coefficients
+  alphaPct       Float
+  betaPct        Float
+  gammaPct       Float
+  // IEC 60891:2021 Correction Params
+  rs             Float?
+  kappa          Float?
+  rshRef         Float?
+  // IAM (Martin-Ruiz)
+  arCoeff        Float?  @default(0.17)
+  // Physical
+  lengthMm       Float
+  widthMm        Float
+  thicknessMm    Float
+  weightKg       Float
+  cellsSeries    Int
+  cellsParallel  Int     @default(1)
+  maxSystemVoltage Float
+  maxCurrent     Float
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  modules        Module[]
+  @@unique([manufacturerId, modelName])
+}
+
+model TestBed {
+  id           String       @id @default(cuid())
+  name         String       @default("TestBed-Alpha")
+  orgId        String
+  org          Organization @relation(fields: [orgId], references: [id])
+  totalSlots   Int          @default(75)
+  rows         Int          @default(15)
+  cols         Int          @default(5)
+  latitude     Float        @default(22.47)
+  longitude    Float        @default(70.06)
+  altitude     Float        @default(20.0)
+  tiltAngle    Float        @default(20.0)
+  azimuthDeg   Float        @default(180.0)
+  locationDesc String?
+  createdAt    DateTime     @default(now())
+  modules      Module[]
+  muxStates    MuxSlotState[]
+  sessions     TestSession[]
+  conditions   EnvironmentalReading[]
+  instruments  Instrument[]
+}
+
+model Module {
+  id           String     @id @default(cuid())
+  serialNumber String     @unique
+  moduleTypeId String
+  moduleType   ModuleType @relation(fields: [moduleTypeId], references: [id])
+  testBedId    String?
+  testBed      TestBed?   @relation(fields: [testBedId], references: [id])
+  slotPosition Int?
+  installDate  DateTime?
+  notes        String?
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  measurements IVMeasurement[]
+  muxHistory   MuxSlotHistory[]
+}
+
+model Instrument {
+  id            String        @id @default(cuid())
+  testBedId     String
+  testBed       TestBed       @relation(fields: [testBedId], references: [id])
+  type          String
+  make          String
+  model         String
+  serialNumber  String?
+  unitNumber    Int           @default(1)
+  interfaceType InterfaceType @default(USB)
+  comPort       String?
+  ipAddress     String?
+  baudRate      Int           @default(9600)
+  maxVoltage    Float         @default(100.0)
+  maxCurrent    Float         @default(10.0)
+  maxPower      Float         @default(500.0)
+  calDueDate    DateTime?
+  isConnected   Boolean       @default(false)
+  firmwareVer   String?
+  createdAt     DateTime      @default(now())
+}
+
+model MuxSlotState {
+  id           String         @id @default(cuid())
+  testBedId    String
+  testBed      TestBed        @relation(fields: [testBedId], references: [id])
+  slotNumber   Int
+  destination  MuxDestination @default(IDLE)
+  forceOn      Boolean        @default(false)
+  senseOn      Boolean        @default(false)
+  updatedAt    DateTime       @updatedAt
+  @@unique([testBedId, slotNumber])
+}
+
+model MuxSlotHistory {
+  id          String         @id @default(cuid())
+  moduleId    String
+  module      Module         @relation(fields: [moduleId], references: [id])
+  slotNumber  Int
+  destination MuxDestination
+  assignedAt  DateTime       @default(now())
+  releasedAt  DateTime?
+}
+
+model EnvironmentalReading {
+  id            String   @id @default(cuid())
+  testBedId     String
+  testBed       TestBed  @relation(fields: [testBedId], references: [id])
+  timestamp     DateTime @default(now())
+  gPoa          Float
+  gPoaBeam      Float?
+  gPoaDiffuse   Float?
+  gPoaAlbedo    Float?
+  gRef          Float?
+  refCellTemp   Float?
+  ghi           Float?
+  dhi           Float?
+  dni           Float?
+  tCell         Float
+  tAmbient      Float
+  tModule       Float?
+  windSpeed     Float?
+  airmass       Float?
+  aod           Float?
+  precipWater   Float?
+  aoi           Float?
+  solarZenith   Float?
+  solarAzimuth  Float?
+  measurements  IVMeasurement[]
+}
+
+model TestSession {
+  id           String     @id @default(cuid())
+  testBedId    String
+  testBed      TestBed    @relation(fields: [testBedId], references: [id])
+  operatorId   String
+  operator     User       @relation(fields: [operatorId], references: [id])
+  name         String
+  description  String?
+  status       TestStatus @default(QUEUED)
+  loadMode     LoadMode   @default(IV_SWEEP)
+  startV       Float      @default(0.0)
+  stopV        Float      @default(100.0)
+  stepCount    Int        @default(500)
+  scanTimeSec  Float      @default(5.0)
+  startedAt    DateTime?
+  completedAt  DateTime?
+  createdAt    DateTime   @default(now())
+  measurements IVMeasurement[]
+  reports      Report[]
+}
+
+model IVMeasurement {
+  id                  String              @id @default(cuid())
+  sessionId           String
+  session             TestSession         @relation(fields: [sessionId], references: [id])
+  moduleId            String
+  module              Module              @relation(fields: [moduleId], references: [id])
+  conditionId         String?
+  condition           EnvironmentalReading? @relation(fields: [conditionId], references: [id])
+  measuredAt          DateTime            @default(now())
+  // Raw measured parameters
+  vocRaw              Float?
+  iscRaw              Float?
+  vmppRaw             Float?
+  imppRaw             Float?
+  pmppRaw             Float?
+  ffRaw               Float?
+  // Corrected to STC
+  vocSTC              Float?
+  iscSTC              Float?
+  vmppSTC             Float?
+  imppSTC             Float?
+  pmppSTC             Float?
+  ffSTC               Float?
+  etaSTC              Float?
+  // Correction metadata
+  correctionProc      CorrectionProcedure @default(NONE)
+  smmmfApplied        Boolean             @default(false)
+  iamApplied          Boolean             @default(false)
+  wireCompApplied     Boolean             @default(false)
+  smmmfValue          Float?
+  iamValue            Float?
+  // Rating (1-5 stars based on irradiance level)
+  qualityRating       Int?                @default(0)
+  notes               String?
+  rawCurvePoints      IVCurvePoint[]
+  correctedCurvePoints IVCurvePointSTC[]
+  correctionResult    CorrectionResult?
+}
+
+model IVCurvePoint {
+  id            String        @id @default(cuid())
+  measurementId String
+  measurement   IVMeasurement @relation(fields: [measurementId], references: [id])
+  seqIndex      Int
+  voltage       Float
+  current       Float
+  power         Float
+  @@index([measurementId, seqIndex])
+}
+
+model IVCurvePointSTC {
+  id            String        @id @default(cuid())
+  measurementId String
+  measurement   IVMeasurement @relation(fields: [measurementId], references: [id])
+  seqIndex      Int
+  voltage       Float
+  current       Float
+  power         Float
+  @@index([measurementId, seqIndex])
+}
+
+model CorrectionResult {
+  id              String              @id @default(cuid())
+  measurementId   String              @unique
+  measurement     IVMeasurement       @relation(fields: [measurementId], references: [id])
+  procedure       CorrectionProcedure
+  gMeas           Float
+  gSTC            Float               @default(1000.0)
+  tMeas           Float
+  tSTC            Float               @default(25.0)
+  alphaUsed       Float
+  betaUsed        Float
+  gammaUsed       Float
+  rsUsed          Float?
+  kappaUsed       Float?
+  smmmfUsed       Float?
+  iamUsed         Float?
+  deltaI          Float?
+  deltaV          Float?
+  correctedAt     DateTime            @default(now())
+}
+
+model Report {
+  id          String      @id @default(cuid())
+  sessionId   String
+  session     TestSession @relation(fields: [sessionId], references: [id])
+  authorId    String
+  author      User        @relation(fields: [authorId], references: [id])
+  title       String
+  format      String      @default("PDF")
+  fileUrl     String?
+  summary     String?
+  createdAt   DateTime    @default(now())
+}
+
+model AIConversation {
+  id        String    @id @default(cuid())
+  sessionId String?
+  moduleId  String?
+  role      String
+  content   String
+  model     String    @default("claude-3-5-sonnet")
+  createdAt DateTime  @default(now())
+}
