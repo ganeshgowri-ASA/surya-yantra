@@ -1,0 +1,89 @@
+{
+  "appId": "in.srishti.suryayantra",
+  "productName": "Surya Yantra",
+  "copyright": "Copyright © 2026 Srishti PV Lab",
+  "asar": true,
+  "asarUnpack": [
+    "**/node_modules/serialport/**",
+    "**/node_modules/@serialport/**"
+  ],
+  "directories": {
+    "output": "release/${version}",
+    "buildResources": "resources"
+  },
+  "files": [
+    "dist/**/*",
+    "package.json",
+    "!**/*.map",
+    "!**/*.ts"
+  ],
+  "extraResources": [
+    {
+      "from": "../web/.next/standalone",
+      "to": "web",
+      "filter": ["**/*"]
+    },
+    {
+      "from": "../web/.next/static",
+      "to": "web/.next/static",
+      "filter": ["**/*"]
+    },
+    {
+      "from": "../web/public",
+      "to": "web/public",
+      "filter": ["**/*"]
+    }
+  ],
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64"]
+      }
+    ],
+    "icon": "resources/icon.ico",
+    "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
+    "publisherName": "Srishti PV Lab",
+    "verifyUpdateCodeSignature": false
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "allowElevation": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "Surya Yantra",
+    "runAfterFinish": true,
+    "installerIcon": "resources/icon.ico",
+    "uninstallerIcon": "resources/icon.ico",
+    "uninstallDisplayName": "Surya Yantra ${version}",
+    "deleteAppDataOnUninstall": false
+  },
+  "portable": {
+    "artifactName": "${productName}-Portable-${version}-${arch}.${ext}"
+  },
+  "mac": {
+    "target": ["dmg"],
+    "category": "public.app-category.developer-tools",
+    "icon": "resources/icon.icns",
+    "hardenedRuntime": true
+  },
+  "linux": {
+    "target": ["AppImage", "deb"],
+    "category": "Science",
+    "icon": "resources/icon.png"
+  },
+  "publish": [
+    {
+      "provider": "github",
+      "owner": "ganeshgowri-ASA",
+      "repo": "surya-yantra",
+      "releaseType": "release"
+    }
+  ]
+}
