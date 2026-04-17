@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd ../.. && pnpm turbo run build --filter=@surya/web",
+  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
+  "framework": "nextjs",
+  "functions": {
+    "app/api/ai/route.ts": { "maxDuration": 60 },
+    "app/api/iv-trace/route.ts": { "maxDuration": 60 },
+    "app/api/reports/route.ts": { "maxDuration": 30 }
+  }
+}
