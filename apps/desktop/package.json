@@ -1,0 +1,44 @@
+{
+  "name": "@surya-yantra/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Surya Yantra — Electron desktop shell for the PV IV Curve Tracer",
+  "author": {
+    "name": "Srishti PV Lab",
+    "email": "lab@srishti-pv.example"
+  },
+  "license": "MIT",
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build:web": "pnpm --filter @surya-yantra/web build",
+    "build": "pnpm run clean && pnpm run build:electron && pnpm run build:web",
+    "dev:electron": "pnpm run build:electron && cross-env NODE_ENV=development ELECTRON_START_URL=http://localhost:3000 electron .",
+    "dev": "concurrently -k -n web,electron -c blue,magenta \"pnpm --filter @surya-yantra/web dev\" \"wait-on http://localhost:3000 && pnpm run dev:electron\"",
+    "start": "electron .",
+    "pack": "pnpm run build && electron-builder --dir",
+    "dist": "pnpm run build && electron-builder",
+    "dist:win": "pnpm run build && electron-builder --win --x64",
+    "publish:win": "pnpm run build && electron-builder --win --x64 --publish always",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "electron-log": "^5.1.2",
+    "electron-updater": "^6.2.1",
+    "serialport": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.5",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "extends": "./electron-builder.json"
+  }
+}
