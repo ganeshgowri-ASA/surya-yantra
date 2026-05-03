@@ -162,4 +162,20 @@ Vercel keeps all previous deployments. To roll back:
 
 ---
 
+## 12. Further Reading
+
+| Topic | Official documentation |
+| ----- | ---------------------- |
+| Vercel deployment | [vercel.com/docs](https://vercel.com/docs) |
+| Vercel environment variables | [vercel.com/docs/projects/environment-variables](https://vercel.com/docs/projects/environment-variables) |
+| Neon serverless Postgres | [neon.tech/docs](https://neon.tech/docs/introduction) |
+| Supabase Postgres | [supabase.com/docs/guides/database](https://supabase.com/docs/guides/database) |
+| Prisma migrations | [prisma.io/docs/orm/prisma-migrate](https://www.prisma.io/docs/orm/prisma-migrate/getting-started) |
+| Cloudflare Tunnel | [developers.cloudflare.com/cloudflare-one/connections/connect-networks](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) |
+| Tailscale Funnel | [tailscale.com/kb/1223/funnel](https://tailscale.com/kb/1223/tailscale-funnel/) |
+| ngrok | [ngrok.com/docs](https://ngrok.com/docs/getting-started/) |
+| Sentry (Next.js) | [docs.sentry.io/platforms/javascript/guides/nextjs](https://docs.sentry.io/platforms/javascript/guides/nextjs/) |
+
+---
+
 *Maintained by the Srishti PV Lab platform team.*

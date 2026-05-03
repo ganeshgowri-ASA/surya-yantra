@@ -215,7 +215,20 @@ a real module anomaly.
 
 ---
 
-## 5. References
+## 5. Peer Review
+
+Checklist for reviewers before promoting this document to a published article or citing it in a lab report.
+
+- [ ] **Annex B validation** — run `correctProcedure1` and `correctProcedure2` against the IEC 60891:2021 Annex B worked example and tabulate the expected vs. computed values. The Vitest suite asserts ±0.5 % on Pmpp, but the expected numerical values are not yet tabulated here.
+- [ ] **Uncertainty budget** — IEC 60891 §8 requires a measurement uncertainty estimate for each procedure. None is currently documented.
+- [ ] **Range-of-applicability table** — the P1 accuracy limits (|ΔG/G| ≤ 0.2, |ΔT| ≤ 10 K) are stated in prose; a table comparing all four procedures' recommended G and T ranges would help practitioners choose the right procedure.
+- [ ] **Cross-reference to test file** — link `apps/web/__tests__/lib/iec60891.test.ts` from this document so readers can verify the implementation directly.
+- [ ] **P3 reference curve provenance** — the bilinear section does not specify how to obtain the two reference curves (outdoor characterisation, flash tester, etc.). Add a note on measurement requirements.
+- [ ] **Reviewer sign-off** — who reviewed the maths before publication? Add a `### Reviewed by` sub-section with name, affiliation, and date.
+
+---
+
+## 6. References
 
 1. IEC 60891:2021, *Photovoltaic devices — Procedures for temperature and
    irradiance corrections to measured I-V characteristics*.
