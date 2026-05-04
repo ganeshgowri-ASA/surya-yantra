@@ -162,4 +162,17 @@ Vercel keeps all previous deployments. To roll back:
 
 ---
 
+## 12. Further Reading
+
+- [Vercel documentation](https://vercel.com/docs) — deployment, edge functions, environment variables.
+- [Neon serverless Postgres](https://neon.tech/docs) — branching, connection pooling, Prisma integration.
+- [Supabase](https://supabase.com/docs) — alternative managed Postgres with row-level security.
+- [Prisma ORM](https://www.prisma.io/docs) — schema migrations, Prisma Client, `migrate deploy` in CI.
+- [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) — exposing local lab services to Vercel without opening firewall ports.
+- [Tailscale Funnel](https://tailscale.com/kb/1223/funnel/) — alternative tunnel using your tailnet.
+- [ngrok](https://ngrok.com/docs) — simplest tunnel for development; paid plan for persistent URLs.
+- [Sentry for Next.js](https://docs.sentry.io/platforms/javascript/guides/nextjs/) — error reporting setup for `SENTRY_DSN`.
+
+---
+
 *Maintained by the Srishti PV Lab platform team.*

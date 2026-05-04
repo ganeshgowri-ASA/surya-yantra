@@ -229,3 +229,56 @@ a real module anomaly.
 5. Martin N., Ruiz J.M., *Calculation of the PV modules angular losses
    under field conditions by means of an analytical model*, Solar Energy
    Materials & Solar Cells 70 (2001) 25–38.
+
+---
+
+## 6. Peer Review
+
+This section tracks the peer-review status of the implementation. Items must
+be resolved before `docs/IEC-CORRECTIONS.md` is cited in a NABL audit submission
+or a published article.
+
+### 6.1 Checklist
+
+- [ ] **Annex B validation table** — run `correctProcedure1` through
+  `correctProcedure4` on the IEC 60891:2021 Annex B worked-example inputs
+  and tabulate expected vs. computed values for Isc, Voc, and Pmpp (±0.5 %
+  tolerance). See issue #7 for the suggested table structure.
+
+- [ ] **Fraunhofer ISE independent comparison** — compare computed outputs
+  against the Fraunhofer ISE open PV-Lab dataset for at least one c-Si and
+  one thin-film module. Deviation ≤ 1 % for P1/P2; document any larger
+  deviations for P3 (bilinear interpolation is inherently less accurate).
+
+- [ ] **Uncertainty budget (IEC 60891 §8)** — document combined measurement
+  uncertainty for each procedure in the format required by NABL accreditation.
+  Inputs: sensor calibration uncertainty (G ±2 %, T ±0.5 K), parameter
+  uncertainty (α ±5 %), and numerical precision.
+
+- [ ] **Range-of-applicability table** — tabulate recommended G and T
+  translation ranges for all four procedures side by side (currently described
+  in prose for P1 only).
+
+- [ ] **Cross-reference to test file** — link to
+  `apps/web/__tests__/lib/iec60891.test.ts` for readers who want to verify
+  the implementation directly.
+
+- [ ] **Reviewer sign-off** — a qualified engineer (MEng or above, PV
+  measurement background) should sign off each procedure before this document
+  is used in a regulatory submission. Add a `### Reviewed by` sub-section
+  here once a reviewer is assigned.
+
+### 6.2 Known limitations
+
+| Procedure | Limitation | Severity |
+|-----------|-----------|----------|
+| P1 | Linear over-prediction near Voc for large ΔG | Warn only (x-sy-correction-warning header) |
+| P3 | No independent parameter output (α, β not produced) | By design; use P2/P4 when params required |
+| P4 | Falls back to P2 when Rsh absent | Silent; logged at DEBUG level |
+| All | No extrapolation guard beyond API warning | User responsibility |
+
+### 6.3 Review history
+
+| Date | Reviewer | Scope | Outcome |
+|------|----------|-------|---------|
+| — | — | — | Not yet reviewed |
