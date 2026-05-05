@@ -50,19 +50,24 @@ surya-yantra/
 │   │   ├── lib/              # Business logic
 │   │   └── prisma/           # Database schema
 │   └── desktop/              # Electron standalone app
-├── packages/
+├── packages/                 # (planned — not yet committed)
 │   ├── scpi-client/          # ESL-Solar SCPI driver
 │   ├── iv-engine/            # IEC 60891 correction engine
 │   └── types/                # Shared TypeScript types
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
+│   ├── schematics/           # SVG circuit diagrams (planned)
 │   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── WIRING.md             # Wiring guide (planned)
 └── docs/
-    ├── PRD.md                # Product Requirements
+    ├── PRD.md                # Product Requirements (planned)
     ├── API.md                # API Reference
     └── IEC-CORRECTIONS.md    # Standards implementation
 ```
+
+> **Note:** Paths marked *(planned)* are tracked in
+> [open issues](https://github.com/ganeshgowri-ASA/surya-yantra/issues) and
+> have not landed yet. The monorepo currently contains `apps/` and `docs/`
+> only.
 
 ---
 

@@ -156,7 +156,7 @@ Response is the `CorrectionResult` record:
   "betaUsed": -0.00244,
   "rsUsed": 0.38,
   "kappaUsed": 0.0012,
-  "smmmfUsed": 1.013,
+  "smmfUsed": 1.013,
   "iamUsed": 0.963,
   "deltaI": 1.985,
   "deltaV": -0.64
