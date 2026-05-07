@@ -50,16 +50,16 @@ surya-yantra/
 │   │   ├── lib/              # Business logic
 │   │   └── prisma/           # Database schema
 │   └── desktop/              # Electron standalone app
-├── packages/
-│   ├── scpi-client/          # ESL-Solar SCPI driver
-│   ├── iv-engine/            # IEC 60891 correction engine
-│   └── types/                # Shared TypeScript types
+├── packages/ *(planned — issue #14)*
+│   ├── scpi-client/          # ESL-Solar SCPI driver *(planned)*
+│   ├── iv-engine/            # IEC 60891 correction engine *(planned)*
+│   └── types/                # Shared TypeScript types *(planned)*
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
+│   ├── schematics/ *(planned — issue #13)*
 │   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── WIRING.md *(planned — issue #13)*
 └── docs/
-    ├── PRD.md                # Product Requirements
+    ├── PRD.md *(planned — issue #12)*
     ├── API.md                # API Reference
     └── IEC-CORRECTIONS.md    # Standards implementation
 ```
@@ -101,6 +101,8 @@ pnpm install
 # Setup environment
 cp apps/web/.env.example apps/web/.env.local
 # Edit .env.local with your DATABASE_URL, ANTHROPIC_API_KEY etc.
+# Note: DATABASE_URL and ANTHROPIC_API_KEY are required for hardware features;
+# the seeded demo data works without them for UI exploration.
 
 # Push database schema
 pnpm db:push
@@ -165,7 +167,7 @@ IAM(θ) = 1 - exp(-cos(θ)/ar) / (1 - exp(-1/ar))
 
 See [`hardware/BOM.md`](hardware/BOM.md) for complete Bill of Materials with online purchase links.
 
-See [`hardware/schematics/`](hardware/schematics/) for:
+See `hardware/schematics/` *(planned — issue #13)* for circuit diagrams:
 - System overview schematic
 - MUX relay matrix wiring
 - 4-wire Kelvin connection detail
