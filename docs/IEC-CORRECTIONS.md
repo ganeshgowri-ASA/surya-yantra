@@ -229,3 +229,57 @@ a real module anomaly.
 5. Martin N., Ruiz J.M., *Calculation of the PV modules angular losses
    under field conditions by means of an analytical model*, Solar Energy
    Materials & Solar Cells 70 (2001) 25–38.
+
+---
+
+## 6. Peer Review
+
+*Section added 2026-05-08 — Thursday weekly peer-review pass.*
+
+This section provides the formal peer-review artefacts required before
+`docs/IEC-CORRECTIONS.md` is cited in a NABL accreditation submission or
+a peer-reviewed publication.
+
+### 6.1 Validation Checklist
+
+Work through each item and record the reviewer's name and date in §6.3.
+
+| # | Checkpoint | Status | Notes |
+|---|-----------|--------|-------|
+| 1 | **Annex B worked example** — run `correctProcedure1` and `correctProcedure2` against the IEC 60891:2021 Annex B reference values; confirm Pmpp, Isc, Voc match §1.5 table within ±0.5 % | ⬜ Pending | See `apps/web/__tests__/lib/iec60891.test.ts` for baseline assertions |
+| 2 | **Procedure 3 bilinear test** — supply two synthetic curves differing by ΔG = 300 W/m², ΔT = 15 K; verify interpolated midpoint matches analytical midpoint within ±0.2 % | ⬜ Pending | No test currently covers P3 with non-trivial ΔG + ΔT simultaneously |
+| 3 | **Procedure 4 shunt test** — confirm P4 degrades to P2 when `Rsh` is omitted; confirm Rsh influence is measurable at G₂/G₁ = 0.2 | ⬜ Pending | `correctProcedure4` fallback path not covered in current test suite |
+| 4 | **Uncertainty budget** — provide per-procedure combined standard uncertainty u_c(Pmpp) per IEC 60891:2021 §8 and GUM (ISO/IEC Guide 98-3) | ⬜ Pending | Required for NABL 121 measurement uncertainty declaration |
+| 5 | **Range of applicability table** — tabulate recommended G and T windows for P1–P4 and cross-reference doc prose in §1.1–1.4 | ⬜ Pending | Prose in §1.1 mentions IEC limits but no consolidated table |
+| 6 | **SMMF edge case** — verify `correctIscForSpectrum` when all spectral arrays are singleton wavelengths (trapezoidal integral degenerates) | ⬜ Pending | Guard clause exists; test coverage absent |
+| 7 | **External validation** — compare Surya Yantra P1/P2 outputs on one real measured curve against a CREST-certified reference instrument or pvlib reference values | ⬜ Pending | Required pre-NABL; planned for Q3 2026 audit campaign |
+| 8 | **Code cross-reference** — confirm every formula in this doc has a direct `// §X.Y` comment in the corresponding `apps/web/lib/` source file | ⬜ Pending | Comments present in `iec60891.ts` but partial for `smmf.ts` and `iam.ts` |
+
+### 6.2 Known Limitations
+
+| Limitation | Procedure | Impact | Mitigation |
+|-----------|-----------|--------|-----------|
+| P1 over-predicts Pmpp near Voc for large ΔG | P1 | ≤ 0.5 % at G₂/G₁ = 0.8 | Use P2 for \|ΔG\| > 100 W/m²; warning header issued |
+| P3 assumes linear interpolation between reference curves | P3 | Nonlinear modules (CdTe, perovskite) may exhibit > 1 % error | Acquire reference curves bracketing target conditions tightly |
+| Trapezoidal SMMF integration loses accuracy for broad peaks | SMMF | < 0.1 % for AM1.5G; higher for atypical spectra | Use ≥ 200 wavelength samples per spectrum |
+| IAM model (Martin-Ruiz) validated only for c-Si glass | IAM | Up to 2 % error for bifacial or bare-cell modules | Update `ar` parameter from module-specific characterisation data |
+| No uncertainty propagation through the correction pipeline | All | Cannot report u_c(Pmpp) per GUM without §6.1 item 4 | Complete uncertainty budget before NABL submission |
+
+### 6.3 Reviewer Sign-off
+
+| Role | Name | Organisation | Review date | Signature |
+|------|------|-------------|-------------|-----------|
+| Technical reviewer (algorithms) | — | — | — | — |
+| Standards reviewer (IEC 60891) | — | — | — | — |
+| Measurement uncertainty reviewer | — | — | — | — |
+| Editor / QM | — | — | — | — |
+
+*No section of this document should be cited in a NABL accreditation submission
+or externally published article until all four sign-off rows above are completed.*
+
+### 6.4 Review History
+
+| Version | Date | Reviewer | Changes |
+|---------|------|----------|---------|
+| 1.0 | 2026-04-17 | (auto-generated) | Initial document |
+| 1.1 | 2026-05-08 | weekly-content-agent | Added §6 Peer Review (this section) |
