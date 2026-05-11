@@ -28,7 +28,7 @@ twitter:
   image: "/og/antaryami-pv-scheduling.png"
 author: "Srishti PV Lab Engineering"
 date: "2026-05-03"
-lastmod: "2026-05-10"
+lastmod: "2026-05-11"
 draft: true
 tags:
   - ai-scheduling
@@ -55,9 +55,9 @@ related_repos:
 
 *Roadmap seed — 3 May 2026 · Updated 10 May 2026 · Srishti PV Lab Engineering*
 
-A 75-module test bed creates a sequencing problem: 75 measurements, one electronic load, daylight hours ticking away as irradiance varies, and a client waiting for a same-day IQC result. [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) — in extremely active development as of 10 May 2026 (**49 open issues**, +7 since Friday, pushed overnight) — optimises on real-time irradiance forecasts, queue priority, fault probability, and AI model cost budgets.
+A 75-module test bed creates a sequencing problem: 75 measurements, one electronic load, daylight hours ticking away as irradiance varies, and a client waiting for a same-day IQC result. [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) — in hypersprint as of 11 May 2026 (**94 open issues**, +45 in 24 h, +91.8%) — optimises on real-time irradiance forecasts, queue priority, fault probability, and AI model cost budgets.
 
-> **Roadmap update (10 May 2026):** The minimum viable `pv-session-planner` webhook integration remains targeted for **Q2 2026**. Full skill orchestration (`pv-fault-router` + `multi-lab-coordinator`) remains Q3 2026. The 49-issue sprint acceleration (from 42 on Friday) is the strongest weekend signal this week.
+> **Roadmap update (11 May 2026):** The minimum viable `pv-session-planner` webhook integration remains targeted for **Q2 2026**. Full skill orchestration (`pv-fault-router` + `multi-lab-coordinator`) remains Q3 2026. The 94-issue hypersprint (+45 in 24 h from 49 on 10 May) is the strongest integration-testing signal yet.
 
 ## The Scheduling Problem
 

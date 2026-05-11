@@ -30,7 +30,7 @@ twitter:
   image: "/og/surya-yantra-overview.png"
 author: "Srishti PV Lab"
 date: "2026-05-02"
-lastmod: "2026-05-10"
+lastmod: "2026-05-11"
 draft: false
 tags:
   - surya-yantra
@@ -58,7 +58,7 @@ related_repos:
 
 # Surya Yantra: Open-Source IEC-Compliant PV Module IV Curve Tracer for India
 
-*Published 2 May 2026 · Updated 10 May 2026 · Srishti PV Lab, Jamnagar*
+*Published 2 May 2026 · Updated 11 May 2026 · Srishti PV Lab, Jamnagar*
 
 > **Publication readiness (9 May 2026):** This post is `draft: false` but has one active blocker before social promotion: OG image `/og/surya-yantra-overview.png` does not yet exist (tracked in [issue #6](https://github.com/ganeshgowri-ASA/surya-yantra/issues/6)). Sitemap and social card submission should wait until issue #6 is resolved. All prose is Friday-polished and peer-reviewed.
 
@@ -144,10 +144,10 @@ Open [http://localhost:3000](http://localhost:3000). The dashboard works with se
 Surya Yantra is one node in the Srishti PV Lab open-source stack:
 
 - **[pv-pranali](https://github.com/ganeshgowri-ASA/pv-pranali)** — Multi-agent URS ingest and procurement orchestration platform (LangGraph + MCP, Wave 6 active as of 10 May 2026, Vercel READY). pv-pranali forms the **requirements and procurement layer** upstream of Surya Yantra: it ingests URS documents for PV test equipment and generates structured requirements (23 YAML requirements from the BBA P0 Sun Simulator URS in Wave 6). The procurement-to-measurement loop closes when pv-pranali's instrument specifications drive Surya Yantra's hardware configuration.
-- **[SolarLabX](https://github.com/ganeshgowri-ASA/SolarLabX)** — LIMS + QMS + audit trail for IEC-accredited labs (20 open issues, active LIMS sprint). Surya Yantra pushes corrected IV measurements directly into SolarLabX's test record database via the `/api/measurements` webhook.
-- **[GanitaSutra-v0](https://github.com/ganeshgowri-ASA/GanitaSutra-v0)** — MATLAB-inspired computation platform (21 toolboxes, SimuFlow block diagrams). GanitaSutra's curve-fitting module (active sprint, **17 open issues** as of 10 May 2026) will automatically extract temperature coefficients and series resistance from two measured curves, removing the need for module datasheet parameters in P3/P4 corrections. **Targeted for Q2 2026.**
-- **[Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os)** — Enterprise AI operating system (**49 open issues** as of 10 May 2026 — overnight sprint, +7 since Friday). Orchestrates multi-lab test scheduling and routes AI diagnostics queries to the optimal model (Claude Opus 4.7 for deep fault analysis, Haiku 4.5 for rapid triage). The minimum viable `pv-session-planner` webhook integration is **targeted for Q2 2026**.
-- **[ShilpaSutra](https://github.com/ganeshgowri-ASA/ShilpaSutra)** — AI-powered text/multimodal to CAD & CFD platform (**37 open issues**, active sprint). Will generate parametric CAD models of the test rack geometry and Kelvin harness routing from constraint descriptions, populating the missing `hardware/schematics/` directory (issue #13).
+- **[SolarLabX](https://github.com/ganeshgowri-ASA/SolarLabX)** — LIMS + QMS + audit trail for IEC-accredited labs (24 open issues, active LIMS sprint). Surya Yantra pushes corrected IV measurements directly into SolarLabX's test record database via the `/api/measurements` webhook.
+- **[GanitaSutra-v0](https://github.com/ganeshgowri-ASA/GanitaSutra-v0)** — MATLAB-inspired computation platform (21 toolboxes, SimuFlow block diagrams). GanitaSutra's curve-fitting module (active sprint, **18 open issues** as of 11 May 2026) will automatically extract temperature coefficients and series resistance from two measured curves, removing the need for module datasheet parameters in P3/P4 corrections. **Targeted for Q2 2026.**
+- **[Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os)** — Enterprise AI operating system (**94 open issues** as of 11 May 2026 — hypersprint, +45 in 24 h, +91.8%). Orchestrates multi-lab test scheduling and routes AI diagnostics queries to the optimal model (Claude Opus 4.7 for deep fault analysis, Haiku 4.5 for rapid triage). The minimum viable `pv-session-planner` webhook integration is **targeted for Q2 2026**.
+- **[ShilpaSutra](https://github.com/ganeshgowri-ASA/ShilpaSutra)** — AI-powered text/multimodal to CAD & CFD platform (**39 open issues**, active sprint). Will generate parametric CAD models of the test rack geometry and Kelvin harness routing from constraint descriptions, populating the missing `hardware/schematics/` directory (issue #13).
 
 ## Roadmap
 

@@ -24,7 +24,7 @@ A draft is ready to promote to `posts/` only when:
 4. `draft: true` is changed to `draft: false` in the front matter.
 5. OG images (`/og/*.png`) exist in `apps/web/public/og/` — see issue #6.
 
-## Active drafts (as of 2026-05-10)
+## Active drafts (as of 2026-05-11)
 
 | File | Topic | Status | Blocking issues |
 |------|-------|--------|----------------|
@@ -37,16 +37,17 @@ A draft is ready to promote to `posts/` only when:
 | `srishti-pv-lab-ecosystem-roadmap-q2-2026.md` | Q2 ecosystem roadmap | ⚙️ In progress | Milestone confirmations |
 | `nabl-documentation-peer-review-workflow.md` | NABL + GitHub QMS | 🌱 Seed | New seed 2026-05-08 |
 | `vitest-to-nabl-uncertainty-budget.md` | Vitest → GUM budget | 🌱 Seed | New seed 2026-05-08; sensor cal certificates |
-| `antaryami-os-42-issue-sprint-governance.md` | AI governance for physical lab OS | 🌱 Seed | New seed 2026-05-09 (Fri); updated to 49 issues Sun |
+| `antaryami-os-42-issue-sprint-governance.md` | AI governance for physical lab OS | 🌱 Seed | Updated to 94 issues 11 May; filename rename needed on promotion (see issue #21) |
 | `shilpasutra-cad-pv-fixture-design.md` | ShilpaSutra AI-CAD for test rack | 🌱 Seed | New seed 2026-05-09 (Fri) |
-| `pv-pranali-multi-agent-pv-proposal-orchestrator.md` | pv-pranali URS ingest + multi-agent procurement orchestration | 🌱 Seed | **New seed 2026-05-10** (Sun); content gap filed as issue |
+| `pv-pranali-multi-agent-pv-proposal-orchestrator.md` | pv-pranali URS ingest + multi-agent procurement orchestration | 🌱 Seed | Content gap filed as issue |
+| `antaryami-os-94-issue-hypersprint-roadmap.md` | antaryami-os 94-issue hypersprint as phase-transition signal | 🌱 Seed | **New seed 2026-05-11** (Sun); count confirmation needed |
 
-## Companion repo sprint state (10 May 2026)
+## Companion repo sprint state (11 May 2026)
 
 | Repo | Open issues | Pushed | Signal |
 |------|-------------|--------|--------|
-| antaryami-os | **49** (+7 Sun) | 2026-05-10 | 🔴 Overnight sprint |
-| ShilpaSutra | **37** (stable) | 2026-03-31 | 🟠 Active |
-| GanitaSutra-v0 | **17** (+1) | 2026-05-09 | 🟠 Active |
-| SolarLabX | **20** (stable) | 2026-03-25 | 🟠 Active |
-| pv-pranali | **new** (Wave 6) | 2026-05-10 | ✅ Vercel READY |
+| antaryami-os | **94** (+45 in 24 h) | 2026-05-10 | 🔴 **Hypersprint** (+91.8%) |
+| ShilpaSutra | **39** (+2) | 2026-03-31 | 🟠 Active |
+| GanitaSutra-v0 | **18** (+1) | 2026-05-09 | 🟠 Active |
+| SolarLabX | **24** (+4) | 2026-03-25 | 🟠 Active |
+| pv-pranali | **0** (Wave 6) | 2026-05-10 | ✅ Vercel READY |

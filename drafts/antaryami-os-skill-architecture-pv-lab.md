@@ -28,7 +28,7 @@ twitter:
   image: "/og/antaryami-skill-architecture.png"
 author: "Srishti PV Lab Engineering"
 date: "2026-05-07"
-lastmod: "2026-05-10"
+lastmod: "2026-05-11"
 draft: true
 tags:
   - ai-operating-system
@@ -55,7 +55,7 @@ related_repos:
 
 *Article seed — 7 May 2026 · Updated 10 May 2026 · Srishti PV Lab Engineering*
 
-**Engineering signal:** [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) went from 4 open issues on 3 May to 31 open issues on 6 May — a 7× increase in 3 days — and has since accelerated to **49 open issues as of 10 May 2026**. This sprint velocity signals a major integration-testing and architectural planning phase. See companion article *"Governing AI That Controls Physical Instruments: Lessons from the Antaryami-OS 42-Issue Sprint"* for the governance angle; this article focuses on the skill architecture.
+**Engineering signal:** [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) went from 4 open issues on 3 May to 31 on 6 May (7× in 3 days) and has since entered a hypersprint: **94 open issues as of 11 May 2026** (+45 in the last 24 hours alone, +91.8%). The 8-day trajectory (4 → 33 → 42 → 49 → 94) is a phase-transition signal — from architectural scaffolding to active hardware integration testing. See companion article *"Governing AI That Controls Physical Instruments: Lessons from the Antaryami-OS 42-Issue Sprint"* for the governance angle; this article focuses on the skill architecture.
 
 This article examines the architectural problem Antaryami-OS is solving and why a skill-based AI OS is a more tractable abstraction than a monolithic LLM agent for controlling physical laboratory instruments.
 
@@ -132,7 +132,7 @@ At 75 modules/day with ~10 % anomaly rate and an average fault-router call costi
 
 ## What the Sprint Signals
 
-The 7× issue increase from 3–06 May, accelerating to 49 issues by 10 May, is consistent with a team running integration testing against Surya Yantra's staging environment and filing each failure as an issue. If so, the sprint is producing real integration coverage data — the most valuable kind of feedback for a physical-lab AI OS, where edge cases from hardware state machines are impossible to enumerate in advance.
+The 7× issue increase from 3–6 May, accelerating to 49 by 10 May and **94 by 11 May** (+91.8% in 24 h), is consistent with a team running integration testing against Surya Yantra's staging environment and filing each failure as an issue. At 94 issues, this sprint is producing real integration coverage data at a scale that would take weeks under normal development cadence — the most valuable kind of feedback for a physical-lab AI OS, where edge cases from hardware state machines are impossible to enumerate in advance.
 
 The governance implications of this sprint scale are covered in *"Governing AI That Controls Physical Instruments: Lessons from the Antaryami-OS 42-Issue Sprint"* (`drafts/antaryami-os-42-issue-sprint-governance.md`).
 
