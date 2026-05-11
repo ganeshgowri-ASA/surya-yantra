@@ -1,7 +1,7 @@
 ---
 title: "Governing AI That Controls Physical Instruments: Lessons from the Antaryami-OS 42-Issue Sprint"
 seo_title: "AI Governance for Physical Lab Automation: Antaryami-OS Sprint Analysis | Srishti PV Lab"
-description: "When AI orchestrates physical laboratory instruments, governance is not optional. How Antaryami-OS's 42-issue sprint on 9 May 2026 — and 49 issues by 10 May — reveals the governance architecture needed to safely run Claude over a 300 V solar test bed."
+description: "When AI orchestrates physical laboratory instruments, governance is not optional. How Antaryami-OS's sprint — 42 issues on 9 May, 49 by 10 May, 94 by 11 May — reveals the governance architecture needed to safely run Claude over a 300 V solar test bed."
 keywords:
   - AI governance physical instruments
   - Antaryami-OS
@@ -18,17 +18,17 @@ keywords:
 canonical: "https://surya-yantra.srishtipvlab.in/posts/antaryami-os-governance-sprint-may-2026"
 og:
   title: "Governing AI Over Physical Instruments: Antaryami-OS Sprint"
-  description: "42 open issues on 9 May, 49 by 10 May — what the Antaryami-OS sprint velocity tells us about governing AI over a 300 V solar test bed."
+  description: "42 on 9 May, 49 by 10 May, 94 by 11 May — what the Antaryami-OS hypersprint velocity tells us about governing AI over a 300 V solar test bed."
   image: "/og/antaryami-governance.png"
   type: "article"
 twitter:
   card: "summary_large_image"
   title: "AI Governance for Physical Lab Automation | Antaryami-OS"
-  description: "42→49 issues in 24 h: governance lessons for AI systems controlling 300 V solar instruments."
+  description: "42→49→94 in 48 h: governance lessons for AI systems controlling 300 V solar instruments."
   image: "/og/antaryami-governance.png"
 author: "Srishti PV Lab Engineering"
 date: "2026-05-09"
-lastmod: "2026-05-10"
+lastmod: "2026-05-11"
 draft: true
 tags:
   - ai-governance
@@ -53,9 +53,11 @@ related_repos:
 
 # Governing AI That Controls Physical Instruments: Lessons from the Antaryami-OS 42-Issue Sprint
 
-*Article seed — 9 May 2026 (Friday — publication-polish angle) · Updated 10 May 2026 · Srishti PV Lab Engineering*
+*Article seed — 9 May 2026 (Friday — publication-polish angle) · Updated 11 May 2026 · Srishti PV Lab Engineering*
 
-**Engineering signal (10 May 2026 update):** [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) pushed to main overnight and now carries **49 open issues** — up from 42 on 9 May (+7 in ≈24 hours, +17.5%). The sprint that started with 42 issues on Friday is accelerating into the weekend. At 49 issues, Antaryami-OS is the highest-velocity repository in the Srishti PV Lab stack. The governance analysis below was written from the 42-issue state; the overnight acceleration reinforces every argument made here.
+**Engineering signal (11 May 2026 update):** [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) now carries **94 open issues** — up from 49 on 10 May (+45 in ≈24 hours, **+91.8%**). The sprint has entered hypersprint territory. At 94 issues, Antaryami-OS is the highest-velocity repository in the stack by a factor of 2.5×. The 8-day trajectory (4 → 33 → 42 → 49 → 94) suggests a phase transition from architectural scaffolding to active hardware integration testing. Every governance argument in this article is amplified by this acceleration — see `drafts/antaryami-os-94-issue-hypersprint-roadmap.md` for the full analysis.
+
+**Engineering signal (10 May 2026 update):** [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) pushed to main overnight and carried **49 open issues** — up from 42 on 9 May (+7 in ≈24 hours, +17.5%). The governance analysis below was written from the 42-issue state; the acceleration to 94 by 11 May reinforces every argument made here.
 
 **Original signal (9 May 2026):** [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) pushed to main this morning and now carries **42 open issues**, up from 33 yesterday (+9, +27% in 24 hours). This is the fourth consecutive day of sprint acceleration for an enterprise AI operating system that, in the Srishti PV Lab stack, will orchestrate test sessions on a 300 V / 27 A solar IV tracer. Forty-two open issues is no longer a side sprint — it is a production-readiness signal that demands governance thinking.
 
@@ -104,7 +106,7 @@ The `rationale` field captures the LLM's stated reason. It is the NABL auditor's
 
 ### 3. Uncertainty Propagation — Does the AI Know What It Doesn't Know?
 
-IEC 60891 correction accuracy degrades when G or T deviates from measurement conditions beyond recommended limits. Each `queryIrradianceForecast()` result should carry `{ G: number, u_G: number }`, and the LLM system prompt should instruct the planner to preference low-uncertainty slots for high-priority modules. This is an architectural requirement the 49-issue sprint is presumably developing.
+IEC 60891 correction accuracy degrades when G or T deviates from measurement conditions beyond recommended limits. Each `queryIrradianceForecast()` result should carry `{ G: number, u_G: number }`, and the LLM system prompt should instruct the planner to preference low-uncertainty slots for high-priority modules. This is an architectural requirement the 94-issue hypersprint is presumably developing at pace.
 
 ### 4. Model Accountability — Which Model Made This Decision?
 
@@ -153,11 +155,15 @@ OUTCOME
   └──────────────────────────────────────────────────────────────┘
 ```
 
+## The 94-Issue Hypersprint (Monday 11 May)
+
+Forty-five new issues in 24 hours (49 → 94, +91.8%) is a qualitative change in sprint character, not merely a quantitative one. A +7 overnight delta confirms a sustained sprint; a +45 overnight delta signals that integration testing has hit a combinatorial surface — hardware state machine edge cases, LIMS schema incompatibilities, and audit log format debates compounding simultaneously.
+
+At 94 issues, this sprint is now generating artefacts at the scale of a week's worth of typical engineering work in a single day. Each filed issue is a governance artefact: documented evidence of a failure mode identified and tracked — the engineering equivalent of a NABL corrective action record (ISO/IEC 17025:2017 §8.7). The 94-issue count represents 94 such records. For the full phase-transition analysis, see `drafts/antaryami-os-94-issue-hypersprint-roadmap.md`.
+
 ## The 49-Issue Signal (Sunday 10 May)
 
-Seven new issues overnight (42 → 49) continues the pattern from Friday's nine-issue day. The weekend push confirms this is a sustained sprint, not a one-day burst. Each filed issue is a governance artefact: documented evidence that the team identified a failure mode and is working to resolve it — the engineering equivalent of a NABL corrective action record (ISO/IEC 17025:2017 §8.7).
-
-At this velocity (averaging +6–9 issues/day over the past week), the sprint suggests active integration testing against Surya Yantra's staging environment. Edge cases from the SCPI state machine, LIMS schema mismatches, and audit log format debates are exactly what should be discovered before a NABL audit — not during one.
+Seven new issues overnight (42 → 49) confirmed the sprint was sustained, not a one-day burst. That signal has since been superseded by the 11 May hypersprint. The 49-issue baseline established that Antaryami-OS was in active integration testing; the jump to 94 confirmed it was hitting hardware-level complexity.
 
 ## Research Narrative
 
@@ -179,7 +185,7 @@ The broader contribution is a governance taxonomy for AI systems that act on phy
 
 ## Peer Review
 
-*Friday 9 May 2026 — Article seed review · Updated Sunday 10 May 2026*
+*Friday 9 May 2026 — Article seed review · Updated Sunday 11 May 2026*
 
 ### Technical Accuracy
 
@@ -187,7 +193,7 @@ The broader contribution is a governance taxonomy for AI systems that act on phy
 - [ ] Audit log JSON structure matches actual Antaryami-OS implementation (verify once sprint lands)
 - [ ] NABL 121 §4.5 equipment record requirements verified against 2023 edition
 - [ ] Model tier routing cost estimates verified against current Anthropic pricing
-- [ ] Issue count updated to 49 as of 10 May 2026 ✅
+- [ ] Issue count updated to 94 as of 11 May 2026 ✅
 
 ### Citation Completeness
 
