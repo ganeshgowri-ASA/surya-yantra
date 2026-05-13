@@ -32,7 +32,7 @@ POST /api/auth/login
 
 | Field    | Type    | Required | Notes                        |
 | -------- | ------- | -------- | ---------------------------- |
-| email    | string  | yes      | Organization-scoped          |
+| email    | string  | yes      | Organisation-scoped          |
 | password | string  | yes      | 12+ chars, case mix + digit  |
 
 Returns `200 { token, user }` or `401`. `token` is a short-lived JWT.
@@ -316,4 +316,4 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+*See git log for revision history. Update alongside any change to route handlers.*
