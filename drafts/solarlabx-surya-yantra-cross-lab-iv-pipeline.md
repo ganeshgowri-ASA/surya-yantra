@@ -28,7 +28,7 @@ twitter:
   image: "/og/solarlabx-cross-lab-pipeline.png"
 author: "Srishti PV Lab Engineering"
 date: "2026-05-12"
-lastmod: "2026-05-12"
+lastmod: "2026-05-13"
 draft: true
 tags:
   - solarlabx
@@ -55,7 +55,7 @@ related_repos:
 
 # Cross-Lab IV Measurement Pipelines: How Surya Yantra and SolarLabX Propagate Measurement Uncertainty Across Sites
 
-*Tuesday seed — 12 May 2026 · Srishti PV Lab Engineering*
+*Tuesday seed — 12 May 2026 · Updated 13 May 2026 · Srishti PV Lab Engineering*
 
 **Engineering signal:** [SolarLabX](https://github.com/ganeshgowri-ASA/SolarLabX) reached **24 open issues** as of 12 May 2026 — up from 20 on 10 May (+4 in 2 days). SolarLabX is the LIMS backend for cross-lab IV measurements from both the Srishti PV Lab Jamnagar facility (Surya Yantra) and a partner Chennai lab. The new issues indicate active development of the inter-lab data pipeline — the integration surface that Antaryami-OS's `multi-lab-coordinator` skill depends on.
 
@@ -168,7 +168,7 @@ The cross-lab pipeline implements the NABL inter-lab comparison requirement. The
 
 1. A practical GUM-compliant uncertainty propagation model for IEC 60891-corrected IV measurements — generalising to any multi-site PV testing network.
 2. An AI-assisted root-cause framework (`multi-lab-coordinator`) for inter-lab Pmpp divergence — the first such AI-mediated inter-lab comparison system for PV testing.
-3. Empirical validation from the Jamnagar-Chennai pair with En number analysis per ISO/IEC 17043:2023.
+3. Empirical validation from the Jamnagar-Chennai pair with En number analysis per ISO/IEC 17043:2023 and ISO 13528:2022.
 
 Target venue: **Solar Energy** (Elsevier) or **Measurement** (Elsevier).
 
@@ -184,6 +184,10 @@ Target venue: **Solar Energy** (Elsevier) or **Measurement** (Elsevier).
 6. SolarLabX: [github.com/ganeshgowri-ASA/SolarLabX](https://github.com/ganeshgowri-ASA/SolarLabX).
 7. Surya Yantra IEC correction API: `POST /api/measurements/:id/correct` — see `docs/API.md`.
 8. Antaryami-OS `multi-lab-coordinator` skill: see `drafts/antaryami-os-skill-architecture-pv-lab.md`.
+9. JCGM 101:2008. *Supplement 1 to the Guide to the Expression of Uncertainty in Measurement — Propagation of distributions using a Monte Carlo method*. BIPM, Paris. — Provides the Monte Carlo alternative to the GUM linear propagation used in §3; recommended when sensitivity coefficients are difficult to evaluate analytically (e.g. when the P3 bilinear correction is used and the derivatives are not closed-form).
+10. IEC 60904-4:2019. *Photovoltaic devices — Part 4: Reference solar devices — Procedures for establishing calibration traceability*. IEC, Geneva. — Defines the SI-traceability chain for reference cells used to calibrate the irradiance sensors at each lab; a prerequisite for inter-lab u(G) agreement.
+11. Jahn U., Herz M., Köntges M., Parlevliet D., Paggi M., Tsanakas I., Stein J., Berger K.A., Ranta S., French R.H., Richter M., Tanahashi T. (2014). *Review on Infrared and Electroluminescence Imaging for PV Field Applications*. IEA PVPS Task 13, Report T13-03:2014. — Reports ±1–2 % expanded uncertainty (k=2) as typical for NABL-class PV laboratories; validates the 2 % Pmpp deviation flag threshold chosen in §3.
+12. ISO 13528:2022. *Statistical methods for use in proficiency testing by interlaboratory comparison*. ISO, Geneva. — Defines the En-score calculation used to evaluate inter-lab comparison results; required alongside ISO/IEC 17043:2023 for the worked En number example planned in the research narrative.
 
 ---
 

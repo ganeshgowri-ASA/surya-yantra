@@ -27,7 +27,7 @@ twitter:
   image: "/og/antaryami-post-hypersprint.png"
 author: "Srishti PV Lab Engineering"
 date: "2026-05-12"
-lastmod: "2026-05-12"
+lastmod: "2026-05-13"
 draft: true
 tags:
   - antaryami-os
@@ -52,7 +52,7 @@ related_repos:
 
 # Day 1 After the Hypersprint: What Antaryami-OS's 4→94 Issue Velocity Reveals About AI-Hardware Integration
 
-*Tuesday seed — 12 May 2026 · Srishti PV Lab Engineering*
+*Tuesday seed — 12 May 2026 · Updated 13 May 2026 · Srishti PV Lab Engineering*
 
 **Engineering signal:** [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) closed 11 May 2026 at 94 open issues — up from 4 on 3 May. The trajectory: 4 → 33 → 42 → 49 → 94 over eight days (+91.8% in the final 24 hours alone). Today, 12 May, is Day 1 of the aftermath. What this sprint reveals about the state of AI-hardware integration is the subject of this article.
 
@@ -127,6 +127,10 @@ Target venue: **IEEE Transactions on Instrumentation and Measurement** or **Meas
 4. Antaryami-OS: [github.com/ganeshgowri-ASA/antaryami-os](https://github.com/ganeshgowri-ASA/antaryami-os).
 5. Surya Yantra webhook integration: `apps/web/lib/antaryami.ts` (planned; see issue #29).
 6. Issue #28 — antaryami-os Q2 critical path triage.
+7. Kim S., Whitehead E.J., Zhang Y. (2008). *Classifying Software Changes: Clean or Buggy?* IEEE Transactions on Software Engineering 34(2), 181–196. DOI: 10.1109/TSE.2008.14. — Grounds the Category A/B/C triage taxonomy in established defect-classification literature; the clean/buggy dichotomy maps to the Category A (safety violation) vs. Category C (seam) distinction.
+8. Zimmermann T., Nagappan N., Gall H., Giger E., Murphy B. (2009). *Cross-project defect prediction: a large scale experiment on data vs. domain vs. process*. FSE 2009, 91–100. DOI: 10.1145/1595696.1595713. — Supports domain-specific triage (the Category A/B/C framework is tailored to NABL-regulated AI instrument control, not generic software defect prediction).
+9. Cunningham W. (1992). *The WyCash portfolio management system*. OOPSLA '92 Experience Report, SIGPLAN Notices 27(10), 29–30. DOI: 10.1145/157738.157748. — Origin of the technical debt metaphor; anchors the "latent integration debt releases at threshold" framing in §1.
+10. Herzig K., Just S., Zeller A. (2013). *It's Not a Bug, It's a Feature: How Misclassification Impacts Bug Prediction*. ICSE 2013, 392–401. DOI: 10.1109/ICSE.2013.6606585. — Caution: raw issue count misclassification risk; supports using the Category A/B/C breakdown rather than total count as the Q2 health signal.
 
 ---
 

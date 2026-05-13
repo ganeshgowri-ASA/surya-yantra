@@ -28,7 +28,7 @@ twitter:
   image: "/og/antaryami-pv-scheduling.png"
 author: "Srishti PV Lab Engineering"
 date: "2026-05-03"
-lastmod: "2026-05-12"
+lastmod: "2026-05-13"
 draft: true
 tags:
   - ai-scheduling
@@ -53,7 +53,7 @@ related_repos:
 
 # AI-Orchestrated PV Lab Scheduling: How Antaryami-OS Manages 75-Module Test Queues
 
-*Roadmap seed — 3 May 2026 · Updated 12 May 2026 · Srishti PV Lab Engineering*
+*Roadmap seed — 3 May 2026 · Updated 13 May 2026 · Srishti PV Lab Engineering*
 
 A 75-module test bed creates a sequencing problem: 75 measurements, one electronic load, daylight hours ticking away as irradiance varies, and a client waiting for a same-day IQC result. [Antaryami-OS](https://github.com/ganeshgowri-ASA/antaryami-os) — in hypersprint as of 11 May 2026 (**94 open issues**, +45 in 24 h, +91.8%) — optimises on real-time irradiance forecasts, queue priority, fault probability, and AI model cost budgets.
 
@@ -157,8 +157,11 @@ Antaryami-OS responds asynchronously: on `SWEEP_COMPLETE` it immediately invokes
 3. Schick T., Dwivedi-Yu J., Dessì R., Raileanu R., Lomeli M., Zettlemoyer L., Cancedda N., Scialom T. (2023). *Toolformer: Language Models Can Teach Themselves to Use Tools*. NeurIPS 2023. arXiv:2302.04761.
 4. Wu Q., Bansal G., Zhang J., et al. (2023). *AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation*. arXiv:2308.08155.
 5. Anthropic (2026). *Claude API: Tool use and multi-turn conversations*. Technical documentation.
-6. IEC 62446-1:2016. IEC, Geneva.
+6. IEC 62446-1:2016. *Photovoltaic (PV) systems — Requirements for testing, documentation and maintenance — Part 1: Grid connected systems — Documentation, commissioning tests and inspection*. IEC, Geneva. — Commissioning documentation baseline that the Antaryami-OS audit log must satisfy for NABL.
 7. Surya Yantra AI diagnostics API: `POST /api/ai/chat` — see `docs/API.md`.
+8. ISO/IEC 17025:2017. *General requirements for the competence of testing and calibration laboratories*. ISO, Geneva. §7.4.2 (traceability of measurement results), §7.8 (reporting of results). — NABL accreditation is based on this standard; the Layer 3 audit log in the skill architecture maps to §7.4.2 traceability requirements.
+9. Valmeekam K., Marquez M., Sreedharan S., Kambhampati S. (2023). *On the Planning Abilities of Large Language Models — A Critical Investigation*. NeurIPS 2023 Workshop. arXiv:2305.15771. — Empirical evidence for LLM planning limitations in sequential multi-step tasks; directly motivates the deterministic safety envelope (Layers 1–3) that wraps the Sonnet 4.6 planner in `pv-session-planner`.
+10. Hong S., Zhuge M., Chen J., Zheng X., Cheng Y., Wang J., Zhang C., Wang Z., Yau S.K.S., Lin Z., Zhou L., Ran C., Xiao L., Wu C., Schmidhuber J. (2024). *MetaGPT: Meta Programming for a Multi-Agent Collaborative Framework*. ICLR 2024. arXiv:2308.00352. — Multi-agent role decomposition pattern; `pv-session-planner` + `pv-fault-router` + `multi-lab-coordinator` follows the MetaGPT role-specialisation architecture.
 
 ---
 

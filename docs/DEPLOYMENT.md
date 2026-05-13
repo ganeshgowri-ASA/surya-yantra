@@ -162,4 +162,21 @@ Vercel keeps all previous deployments. To roll back:
 
 ---
 
+## 12. Further Reading
+
+| Resource | URL |
+|----------|-----|
+| Vercel Documentation — Next.js deployment | https://vercel.com/docs/frameworks/nextjs |
+| Neon Serverless PostgreSQL — Getting started | https://neon.tech/docs/introduction |
+| Supabase — Self-hosting guide | https://supabase.com/docs/guides/self-hosting |
+| Prisma ORM — Deployment guides | https://www.prisma.io/docs/orm/prisma-client/deployment |
+| Anthropic API Reference — Tool use | https://docs.anthropic.com/en/api/tool-use |
+| NextAuth.js — Configuration options | https://next-auth.js.org/configuration/options |
+| Cloudflare Tunnel — Getting started | https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/ |
+| Tailscale Funnel — Documentation | https://tailscale.com/kb/1223/funnel |
+| Sentry — Next.js integration guide | https://docs.sentry.io/platforms/javascript/guides/nextjs/ |
+| next-sitemap — Configuration reference | https://github.com/iamvishnusankar/next-sitemap |
+
+---
+
 *Maintained by the Srishti PV Lab platform team.*
