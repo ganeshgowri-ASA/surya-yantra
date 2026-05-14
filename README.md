@@ -47,21 +47,24 @@ surya-yantra/
 │   ├── web/                  # Next.js 14 Web App (Vercel)
 │   │   ├── app/              # App Router pages
 │   │   ├── components/       # UI components
-│   │   ├── lib/              # Business logic
+│   │   ├── lib/              # Business logic (iec60891.ts, smmf.ts, iam.ts)
 │   │   └── prisma/           # Database schema
 │   └── desktop/              # Electron standalone app
-├── packages/
-│   ├── scpi-client/          # ESL-Solar SCPI driver
-│   ├── iv-engine/            # IEC 60891 correction engine
-│   └── types/                # Shared TypeScript types
+├── packages/                 # [planned] Turborepo shared packages
+│   ├── scpi-client/          # [planned] ESL-Solar SCPI driver
+│   ├── iv-engine/            # [planned] IEC 60891 correction engine
+│   └── types/                # [planned] Shared TypeScript types
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
+│   ├── schematics/           # [planned] SVG circuit diagrams
 │   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── WIRING.md             # [planned] Wiring guide
+├── drafts/                   # Article drafts & research seeds
+├── posts/                    # Published articles
 └── docs/
-    ├── PRD.md                # Product Requirements
+    ├── PRD.md                # [planned] Product Requirements
     ├── API.md                # API Reference
-    └── IEC-CORRECTIONS.md    # Standards implementation
+    ├── IEC-CORRECTIONS.md    # Standards implementation
+    └── REFERENCES.md         # Full IEC/IEEE bibliography
 ```
 
 ---
@@ -191,14 +194,18 @@ See [`hardware/schematics/`](hardware/schematics/) for:
 
 ## Standards Compliance
 
-- **IEC 60891:2021** — Temperature & irradiance corrections to I-V characteristics
-- **IEC 60904-1:2020** — I-V measurement of PV devices
-- **IEC 60904-3:2019** — Measurement principles (AM1.5G reference spectrum)
-- **IEC 60904-7:2019** — Computation of spectral mismatch
-- **IEC 61215:2021** — Module design qualification
-- **IEC 61853-1:2011** — Power & energy rating, irradiance & temperature
-- **IEC 61853-2:2016** — Spectral responsivity, AOI, module operating temperature
-- **IEC 61853-3:2018** — Energy rating calculation
+| Standard | Title | Scope in this project |
+|---|---|---|
+| [IEC 60891:2021](https://webstore.iec.ch/publication/64639) | Temperature & irradiance corrections to I-V characteristics | Procedures 1–4, core correction engine |
+| [IEC 60904-1:2020](https://webstore.iec.ch/publication/61018) | I-V measurement of PV devices | Measurement protocol, sweep parameters |
+| [IEC 60904-3:2019](https://webstore.iec.ch/publication/60638) | Measurement principles, AM1.5G reference spectrum | Reference spectrum for SMMF |
+| [IEC 60904-7:2019](https://webstore.iec.ch/publication/60639) | Computation of spectral mismatch correction | SMMF calculation (`lib/smmf.ts`) |
+| [IEC 61215:2021](https://webstore.iec.ch/publication/68282) | Module design qualification | Module catalogue type codes |
+| [IEC 61853-1:2011](https://webstore.iec.ch/publication/6172) | Power & energy rating, irradiance & temperature | Energy rating baseline |
+| [IEC 61853-2:2016](https://webstore.iec.ch/publication/24653) | Spectral responsivity, AOI, module operating temperature | Martin-Ruiz IAM (`lib/iam.ts`) |
+| [IEC 61853-3:2018](https://webstore.iec.ch/publication/62978) | Energy rating calculation | Seasonal energy yield reports |
+
+See [`docs/REFERENCES.md`](docs/REFERENCES.md) for full bibliographic details.
 
 ---
 
