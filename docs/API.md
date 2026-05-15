@@ -174,11 +174,19 @@ POST /api/corrections/p3
 POST /api/corrections/p4
 POST /api/corrections/smmf
 POST /api/corrections/iam
+POST /api/corrections/apply
 ```
 
 All endpoints accept POSTed JSON and return a corrected `IVCurve` (or scalar
 factor for `smmf`/`iam`). See [`IEC-CORRECTIONS.md`](./IEC-CORRECTIONS.md) for
 the algorithmic details.
+
+`POST /api/corrections/apply` is the **consolidated pipeline endpoint** that
+runs IAM → SMMF → IEC 60891 correction in the correct order (see
+[IEC-CORRECTIONS.md §4](./IEC-CORRECTIONS.md#4-order-of-operations-in-post-apicorrectionsapply)).
+Prefer this over the individual endpoints for production use; it enforces the
+pipeline order and aborts with HTTP 422 if any intermediate factor falls outside
+`[0.5, 2.0]`.
 
 Example — `POST /api/corrections/p3`:
 
@@ -316,4 +324,4 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+*Last updated 2026-05-15. Update alongside any change to route handlers.*
