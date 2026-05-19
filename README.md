@@ -46,23 +46,23 @@ surya-yantra/
 ├── apps/
 │   ├── web/                  # Next.js 14 Web App (Vercel)
 │   │   ├── app/              # App Router pages
-│   │   ├── components/       # UI components
-│   │   ├── lib/              # Business logic
+│   │   ├── components/       # UI components (shadcn/ui)
+│   │   ├── lib/              # IEC correction engine, SMMF, IAM
 │   │   └── prisma/           # Database schema
-│   └── desktop/              # Electron standalone app
-├── packages/
-│   ├── scpi-client/          # ESL-Solar SCPI driver
-│   ├── iv-engine/            # IEC 60891 correction engine
-│   └── types/                # Shared TypeScript types
+│   └── desktop/              # Electron standalone app (Windows)
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
-│   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
-└── docs/
-    ├── PRD.md                # Product Requirements
-    ├── API.md                # API Reference
-    └── IEC-CORRECTIONS.md    # Standards implementation
+│   └── BOM.md                # Complete Bill of Materials (India, INR)
+├── docs/
+│   ├── API.md                # REST + library API reference
+│   ├── IEC-CORRECTIONS.md    # IEC 60891/60904-7/61853-2 algorithms
+│   ├── DEPLOYMENT.md         # Vercel deployment walkthrough
+│   └── HARDWARE-SETUP.md     # Rack, MUX, Kelvin harness, sensors
+└── drafts/                   # Research article seeds (work-in-progress)
 ```
+
+> **Planned packages** (not yet extracted from `apps/web/lib`):
+> `packages/scpi-client` — ESL-Solar SCPI driver · `packages/iv-engine` — IEC correction engine · `packages/types` — shared TypeScript types.
+> Tracked in [issue #3](../../issues/3).
 
 ---
 
@@ -163,13 +163,9 @@ IAM(θ) = 1 - exp(-cos(θ)/ar) / (1 - exp(-1/ar))
 
 ## Hardware
 
-See [`hardware/BOM.md`](hardware/BOM.md) for complete Bill of Materials with online purchase links.
+See [`hardware/BOM.md`](hardware/BOM.md) for the complete India Bill of Materials with vendor links and GST-exclusive totals.
 
-See [`hardware/schematics/`](hardware/schematics/) for:
-- System overview schematic
-- MUX relay matrix wiring
-- 4-wire Kelvin connection detail
-- 19" rack layout drawing
+Circuit schematics (system overview, MUX relay matrix, 4-wire Kelvin connection, 19" rack layout) are planned for `hardware/schematics/` — see [issue #2](../../issues/2).
 
 ---
 
