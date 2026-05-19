@@ -11,7 +11,8 @@ Complete reference for the REST/JSON endpoints exposed by the Next.js app under
 
 ## Table of Contents
 
-1. [Authentication](#authentication)
+1. [Health](#health)
+2. [Authentication](#authentication)
 2. [Modules & Registry](#modules--registry)
 3. [Test Sessions](#test-sessions)
 4. [IV Measurements](#iv-measurements)
@@ -21,6 +22,16 @@ Complete reference for the REST/JSON endpoints exposed by the Next.js app under
 8. [Reports](#reports)
 9. [AI Diagnostics](#ai-diagnostics)
 10. [Library API (internal)](#library-api-internal)
+
+---
+
+## Health
+
+```
+GET /api/health
+```
+
+Returns `200 { "status": "ok", "version": "<git-sha>" }`. Used by Vercel uptime monitors and the smoke-test script in `docs/DEPLOYMENT.md`. No authentication required.
 
 ---
 
@@ -316,4 +327,8 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+Also missing from this document (tracked in [issue #4](../../issues/4)):
+- `POST /api/mux/:testBedId/selftest` — relay health self-test (documented in `HARDWARE-SETUP.md §4.4`)
+- `GET /api/ai/conversations/:sessionId` — list prior AI diagnostic conversations
+
+*Last updated 2026-05-19. Update alongside any change to route handlers.*
