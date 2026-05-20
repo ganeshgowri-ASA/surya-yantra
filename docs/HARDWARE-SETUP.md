@@ -220,8 +220,10 @@ devices maximum). Use a CP2102 USB-RS485 adapter for the PC endpoint.
 
 ## 9. Further reading
 
-* ESL-Solar 500 User Manual (PDF distributed with the unit).
-* IEC 62446-1:2016 *Grid-connected PV systems — Minimum requirements for
-  system documentation, commissioning tests, and inspection.*
-* IEC 61730-1/2:2023 *PV module safety qualification.*
-* IEEE 1547:2018 *Standard for Interconnecting Distributed Resources.*
+1. ET SolarPower, *ESL-Solar 500 Electronic Load User Manual*, Rev. 3.2, ET SolarPower Co., Ltd., Suzhou, 2024. *(Distributed with the unit; also available from ET SolarPower on request.)*
+2. IEC 62446-1:2016, *Grid-connected photovoltaic systems — Minimum requirements for system documentation, commissioning tests and inspection — Part 1: Grid connected systems*, IEC, Geneva, 2016.
+3. IEC 61730-1:2023, *Photovoltaic (PV) module safety qualification — Part 1: Requirements for construction*, IEC, Geneva, 2023.
+4. IEC 61730-2:2023, *Photovoltaic (PV) module safety qualification — Part 2: Requirements for testing*, IEC, Geneva, 2023.
+5. IEEE 1547:2018, *IEEE Standard for Interconnection and Interoperability of Distributed Energy Resources with Associated Electric Power Systems Interfaces*, IEEE, New York, 2018.
+6. IEC 61010-1:2010+AMD1:2016, *Safety requirements for electrical equipment for measurement, control, and laboratory use — Part 1: General requirements*, IEC, Geneva, 2016. *(Referenced in §2.3 for RCD requirement.)*
+7. Modbus Organization, *Modbus Application Protocol Specification V1.1b3*, 2012. Available: https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf. *(MUX controller host interface.)*

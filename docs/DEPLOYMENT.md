@@ -162,4 +162,16 @@ Vercel keeps all previous deployments. To roll back:
 
 ---
 
-*Maintained by the Srishti PV Lab platform team.*
+---
+
+## 12. Further reading
+
+1. Vercel, *Monorepos — Frameworks*, Vercel Documentation. Available: https://vercel.com/docs/monorepos. [Accessed: 2026-05-20].
+2. Neon, *Serverless Postgres — Branching*, Neon Documentation. Available: https://neon.tech/docs/introduction/branching. [Accessed: 2026-05-20]. *(Database branching for staging deployments.)*
+3. Cloudflare, *Cloudflare Tunnel Documentation*, Cloudflare, Inc. Available: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/. [Accessed: 2026-05-20]. *(Hardware-to-cloud relay, §8.)*
+4. Prisma, *Prisma Migrate Deploy*, Prisma Documentation. Available: https://www.prisma.io/docs/reference/api-reference/command-reference#migrate-deploy. [Accessed: 2026-05-20].
+5. IEC 62443-4-2:2019, *Security for industrial automation and control systems — Part 4-2: Technical security requirements for IACS components*, IEC, Geneva, 2019. *(Applies to the relay gateway deployed at §8.)*
+
+---
+
+*Maintained by the Srishti PV Lab platform team. Last linted 2026-05-20.*
