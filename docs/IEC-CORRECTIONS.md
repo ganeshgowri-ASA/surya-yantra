@@ -215,7 +215,58 @@ a real module anomaly.
 
 ---
 
-## 5. References
+## 6. Peer-Review Checklist (IEC Correction Engine)
+
+Use this checklist before merging any change to `apps/web/lib/iec60891.ts`,
+`smmf.ts`, or `iam.ts`, and before publishing any article that cites these
+algorithms. Each item maps to one or more test assertions in
+`apps/web/__tests__/lib/`.
+
+### 6.1 Correctness
+
+- [ ] **P1 Isc shift** — formula matches IEC 60891:2021 Eq. (1): `ΔI = Isc·(G2/G1−1) + α·ΔT`. Verify against the worked example in §1.5 (G1=824, T1=47.3°C → Isc=11.49 A at STC).
+- [ ] **P2 multiplicative** — current scaled by both `(1+α_rel·ΔT)` and `G2/G1`. Confirm Pmpp differs from P1 by < 0.3 % on the §1.5 example.
+- [ ] **P3 interpolation parameter** — `t ∈ [0,1]` is interpolation; outside is extrapolation. Confirm a warning is logged when `|t| > 1`.
+- [ ] **P4 Rsh term** — when `Rsh` is supplied, the `(V/Rsh)·(gFactor−1)` term is non-zero and changes `I2` by at least 0.1 % at G2/G1 = 0.5.
+- [ ] **MPP finder** — `findMPP` returns the correct vmpp/impp/pmpp triplet for a synthetic parabolic IV curve (see `iec60891.test.ts`).
+- [ ] **Fill-factor edge cases** — returns 0 when Isc=0 or Voc=0; does not throw.
+
+### 6.2 Input Validation
+
+- [ ] `correctProcedure1` throws when `G1 ≤ 0`.
+- [ ] `computeSMMF` throws when the denominator integral is zero (non-overlapping spectra).
+- [ ] `iamMartinRuiz` returns exactly 0 at θ=90° and 1 at θ=0° for any positive `ar`.
+- [ ] All functions throw `Error` (not silent `NaN`) for non-finite inputs.
+
+### 6.3 Units Consistency
+
+- [ ] `alpha` / `beta` are passed in **absolute** units (A/°C, V/°C), **not** %/°C. The Prisma → API converter (multiply by STC Isc/Voc) must be exercised in integration tests.
+- [ ] `SMMF` is dimensionless; both numerator and denominator integrals use the same `W/m²/nm × A/W` unit stack.
+- [ ] `IAM(θ)` is normalised to 1 at θ=0 — do not mix with `ar` in degrees vs radians (use `radians: false` flag).
+
+### 6.4 Numerical Accuracy
+
+- [ ] P1 vs P2 Pmpp difference < 0.5 % for `|ΔG| ≤ 200 W/m²`.
+- [ ] SMMF on identical test/ref spectra returns 1.000 ±1 ppm.
+- [ ] `trapz` result matches `scipy.integrate.trapezoid` to < 0.01 % for the AM1.5G reference dataset.
+- [ ] No division-by-zero or `Infinity` in any return value for physically plausible inputs.
+
+### 6.5 Documentation Match
+
+- [ ] Every formula in §1–§3 of this document has a corresponding line-comment in the source file.
+- [ ] The "Order of operations" diagram (§4) matches the actual call sequence in `POST /api/corrections/apply`.
+- [ ] The §1.5 worked example table is reproducible by running `correctProcedure1` and `correctProcedure2` with the stated inputs.
+- [ ] API.md `CorrectionResult` schema lists `smmfUsed` (not `smmmfUsed`) — typo fixed 2026-05-21.
+
+### 6.6 Safety Rails
+
+- [ ] Pipeline aborts with HTTP 422 when any correction factor is outside `[0.5, 2.0]`.
+- [ ] `x-sy-correction-warning` header is returned when `|G2/G1 − 1| > 0.2` or `|ΔT| > 10 K` (P1 only).
+- [ ] MUX interlocking verified: only one ELOAD-bound slot active at a time (API returns 409 otherwise).
+
+---
+
+## 7. References
 
 1. IEC 60891:2021, *Photovoltaic devices — Procedures for temperature and
    irradiance corrections to measured I-V characteristics*.
@@ -229,3 +280,8 @@ a real module anomaly.
 5. Martin N., Ruiz J.M., *Calculation of the PV modules angular losses
    under field conditions by means of an analytical model*, Solar Energy
    Materials & Solar Cells 70 (2001) 25–38.
+6. IEC 62446-1:2016, *Grid-connected PV systems — Minimum requirements for
+   system documentation, commissioning tests, and inspection*.
+7. King D.L. et al., *Photovoltaic Array Performance Model*, Sandia Report
+   SAND2004-3535 (2004) — reference for empirical series-resistance
+   extraction methods used in pre-P1 calibration workflows.
