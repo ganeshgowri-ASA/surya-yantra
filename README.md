@@ -47,21 +47,26 @@ surya-yantra/
 │   ├── web/                  # Next.js 14 Web App (Vercel)
 │   │   ├── app/              # App Router pages
 │   │   ├── components/       # UI components
-│   │   ├── lib/              # Business logic
-│   │   └── prisma/           # Database schema
-│   └── desktop/              # Electron standalone app
-├── packages/
+│   │   ├── lib/              # Business logic (IEC 60891, SMMF, IAM)
+│   │   └── prisma/           # Database schema (20 models)
+│   └── desktop/              # Electron standalone app (Windows .exe)
+├── packages/                 # [Milestone 2 — not yet implemented]
 │   ├── scpi-client/          # ESL-Solar SCPI driver
-│   ├── iv-engine/            # IEC 60891 correction engine
+│   ├── iv-engine/            # IEC 60891 correction engine (extracted)
 │   └── types/                # Shared TypeScript types
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
+│   ├── schematics/           # [Planned] SVG circuit diagrams
 │   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── WIRING.md             # [Planned] Kelvin harness wiring guide
+├── drafts/                   # Research article drafts
+├── posts/                    # Published articles
+├── editorial/                # Peer-review checklist & editorial tooling
 └── docs/
-    ├── PRD.md                # Product Requirements
+    ├── PRD.md                # [Planned] Product Requirements Document
     ├── API.md                # API Reference
-    └── IEC-CORRECTIONS.md    # Standards implementation
+    ├── IEC-CORRECTIONS.md    # Standards implementation notes
+    ├── HARDWARE-SETUP.md     # Rack, MUX, sensor commissioning guide
+    └── DEPLOYMENT.md         # Vercel deployment walkthrough
 ```
 
 ---
