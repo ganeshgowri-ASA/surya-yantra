@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Surya Yantra / Srishti PV Lab — Article Sitemap
+  Generated: 2026-05-23
+  Issue #49: sitemap.xml was missing — this stub must be wired to the Next.js build.
+
+  For production, replace this static file with a dynamic Next.js sitemap:
+    apps/web/app/sitemap.ts  (App Router convention)
+
+  The sitemap.ts should read all posts/*.md files, parse their front-matter,
+  and emit <url> entries with <lastmod> from the `lastmod` field.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+
+  <!-- Main app pages -->
+  <url>
+    <loc>https://srishtipvlab.in/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://srishtipvlab.in/research/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Published articles (populate from posts/ on each build) -->
+  <!-- PLACEHOLDER: replace with dynamically generated entries -->
+
+  <!-- Draft articles (SEO-indexed once canonical_url resolves) -->
+  <url>
+    <loc>https://srishtipvlab.in/research/iec60891-procedure-comparison-hjt-topcon-thin-film</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://srishtipvlab.in/research/realtime-iv-streaming-llm-fault-diagnosis-pv-testbed</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://srishtipvlab.in/research/ganitasutra-numerics-pv-correction-pipeline</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://srishtipvlab.in/research/shilpasutra-solar-instrument-ux-codesign</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
