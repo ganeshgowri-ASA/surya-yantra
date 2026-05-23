@@ -1,0 +1,17 @@
+# Surya Yantra / Srishti PV Lab
+# robots.txt — issue #49: was missing, created 2026-05-23
+#
+# For the Next.js app, wire this via:
+#   apps/web/app/robots.ts  (App Router convention)
+# which should return a MetadataRoute.Robots object.
+
+User-agent: *
+Allow: /
+
+# Disallow internal/API routes from indexing
+Disallow: /api/
+Disallow: /api/auth/
+Disallow: /api/ws/
+
+# Sitemap location
+Sitemap: https://srishtipvlab.in/sitemap.xml
