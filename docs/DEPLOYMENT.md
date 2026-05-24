@@ -1,3 +1,11 @@
+---
+title: "Deployment Guide — Vercel"
+description: "Step-by-step guide to deploying the Surya Yantra Next.js web app on Vercel with managed PostgreSQL, environment secrets, custom domain, and hardware relay connectivity."
+keywords: [Vercel deployment, Next.js, PostgreSQL, Prisma, solar PV web app, Cloudflare Tunnel]
+last_updated: 2026-04-17
+status: published
+---
+
 # Deployment Guide — Vercel
 
 This guide walks through deploying the Surya Yantra web app (`apps/web`) to

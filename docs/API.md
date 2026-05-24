@@ -1,3 +1,11 @@
+---
+title: "Surya Yantra — API Reference"
+description: "Complete REST/JSON API reference for Surya Yantra: modules, sessions, IV measurements, IEC corrections, MUX control, reports, and AI diagnostics."
+keywords: [surya-yantra, API, IEC 60891, REST, IV curve, solar PV, Next.js]
+last_updated: 2026-04-17
+status: published
+---
+
 # Surya Yantra — API Reference
 
 Complete reference for the REST/JSON endpoints exposed by the Next.js app under

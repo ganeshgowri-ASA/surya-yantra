@@ -1,3 +1,11 @@
+---
+title: "Surya Yantra — Complete Bill of Materials"
+description: "Itemised India procurement BOM for the Srishti PV Lab 75-module test bed: electronic load, MUX relays, Kelvin harness, environmental sensors, rack hardware, and software licences. Grand total ₹39.6 lakh incl. GST."
+keywords: [PV test bed BOM, ESL-Solar 500, Omron G9EA relay, Kipp Zonen SMP10, solar lab procurement India, MUX relay matrix]
+last_updated: 2026-04-17
+status: published
+---
+
 # Surya Yantra — Complete Bill of Materials
 
 All prices are indicative **India MRP in INR, excluding GST**, collected in

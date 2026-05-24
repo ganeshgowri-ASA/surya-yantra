@@ -1,3 +1,11 @@
+---
+title: "IEC Correction Algorithms — Implementation Notes"
+description: "How Surya Yantra implements IEC 60891:2021 Procedures 1–4, IEC 60904-7 spectral mismatch, and IEC 61853-2 Martin-Ruiz IAM corrections with rationale for each approximation."
+keywords: [IEC 60891, IEC 60904-7, IEC 61853-2, SMMF, IAM, IV correction, spectral mismatch, incidence angle modifier]
+last_updated: 2026-04-17
+status: published
+---
+
 # IEC Correction Algorithms — Implementation Notes
 
 This document describes **how** Surya Yantra implements the corrections
