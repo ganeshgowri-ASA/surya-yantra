@@ -1,3 +1,11 @@
+---
+title: "Hardware Setup Guide"
+description: "Step-by-step assembly guide for the Srishti PV Lab 75-module test bed: ESL-Solar 500 electronic load, 300-relay MUX matrix, 4-wire Kelvin sensing, environmental sensors, and 36U rack."
+keywords: [ESL-Solar 500, MUX relay matrix, Kelvin sensing, pyranometer, PV test bed, SCPI, solar lab setup]
+last_updated: 2026-04-17
+status: published
+---
+
 # Hardware Setup Guide
 
 Step-by-step instructions for assembling the Srishti PV Lab 75-module test
