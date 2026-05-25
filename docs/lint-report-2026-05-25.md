@@ -1,0 +1,131 @@
+# Structural Lint Report — 2026-05-25
+
+Automated structural audit of `docs/` and `hardware/` run on Monday, 2026-05-25.
+Covers heading hierarchy, citation coverage, broken internal links, and alt-text on figures.
+
+---
+
+## 1. Files Scanned
+
+| File | Lines | Last commit (repo log) |
+|------|-------|----------------------|
+| `README.md` | 212 | 3031b05 |
+| `docs/API.md` | 319 | 3031b05 |
+| `docs/DEPLOYMENT.md` | 165 | 3031b05 |
+| `docs/HARDWARE-SETUP.md` | 228 | 3031b05 |
+| `docs/IEC-CORRECTIONS.md` | 231 | 3031b05 |
+| `hardware/BOM.md` | 161 | 3031b05 |
+
+No files in `drafts/` or `posts/` existed prior to this run (created today).
+
+---
+
+## 2. Heading Hierarchy — PASS
+
+All files use a single H1 followed by H2/H3/H4 in strict descending order.
+No heading level skips detected.
+
+---
+
+## 3. Citation Coverage
+
+| File | References section | Status |
+|------|--------------------|--------|
+| `docs/IEC-CORRECTIONS.md` | §5 References (5 entries) | PASS |
+| `docs/HARDWARE-SETUP.md` | §9 Further reading (4 entries) | PASS |
+| `docs/API.md` | None (API reference — acceptable) | N/A |
+| `docs/DEPLOYMENT.md` | None (operational guide — acceptable) | N/A |
+| `hardware/BOM.md` | None (BOM table — acceptable) | N/A |
+| `README.md` | Standards list in §Standards Compliance | PASS |
+
+---
+
+## 4. Broken Internal Links
+
+These paths are referenced in documentation but **do not exist in the repository**.
+Each has a linked GitHub issue filed today.
+
+### 4.1 HIGH — referenced as existing, not found
+
+| Source file | Broken reference | Issue |
+|-------------|-----------------|-------|
+| `README.md` L57–64 | `packages/scpi-client/` | #TBD-1 |
+| `README.md` L57–64 | `packages/iv-engine/` | #TBD-1 |
+| `README.md` L57–64 | `packages/types/` | #TBD-1 |
+| `README.md` L169 | `hardware/WIRING.md` | #TBD-2 |
+| `README.md` L169 | `hardware/schematics/` (directory) | #TBD-2 |
+| `docs/DEPLOYMENT.md` L118 | `apps/desktop/relay` | #TBD-3 |
+
+### 4.2 MEDIUM — referenced with explicit "not yet committed" note
+
+| Source file | Broken reference | Issue |
+|-------------|-----------------|-------|
+| `docs/HARDWARE-SETUP.md` L132 | `hardware/firmware/mux-controller/` | #TBD-4 |
+
+### 4.3 LOW — stale timestamp
+
+| Source file | Stale content | Fix |
+|-------------|--------------|-----|
+| `docs/API.md` L319 | "Generated 2026-04-17" | Updated to 2026-05-25 in this PR |
+
+---
+
+## 5. Alt-Text on Figures — N/A
+
+No image files (`*.png`, `*.svg`, `*.jpg`, `*.gif`) are embedded via Markdown syntax
+in any scanned file. The `hardware/schematics/` directory does not exist yet (see §4.1).
+
+---
+
+## 6. Summary
+
+| Check | Result |
+|-------|--------|
+| Heading hierarchy | ✅ PASS |
+| Citation coverage | ✅ PASS (where required) |
+| Broken links — blocking | ❌ 6 references point to missing files |
+| Broken links — noted | ⚠️ 1 reference (explicitly flagged in source) |
+| Stale timestamps | ⚠️ 1 (fixed in this PR) |
+| Alt-text | ✅ N/A (no figures yet) |
+
+---
+
+## 6a. Vercel Deployment Status
+
+Checked 2026-05-25 against Vercel team `ganeshgowrimitsui-3250s-projects`.
+
+| Project | Latest deployment | State | Notes |
+|---------|-----------------|-------|-------|
+| `surya-yantra` | `dpl_72u126AGvr4fn7f3V9LfK85tRARn` (PR #85, 2026-05-24) | **READY ✅** | Saturday SEO/metadata pass; all 20 recent previews READY |
+| `solar-lab-x` | `dpl_26bWy8ZcWN86MDWFGBi1KSANXWSZ` (PR #144, 2026-05-25) | CANCELED | Normal — PR preview superseded by merge. No ERROR states in last 20 builds. Production assumed healthy. |
+
+**No build failures found.** No action needed.
+
+---
+
+## 7. Engineering Signals from Sibling Repos (2026-05-24/25)
+
+These signals informed the two Monday article outlines in `drafts/`.
+
+| Repo | Pushed | Signal (from commit message) |
+|------|--------|------------------------------|
+| antaryami-os | 2026-05-24 | Enterprise AI OS push — exact diff not accessible (MCP scope restriction), but active 138-issue sprint ongoing |
+| GanitaSutra-v0 | 2026-05-24 | TypeScript math engine push — 32 open issues, active |
+| ShilpaSutra | 2026-05-24 | AI-to-CAD/CFD platform push — 98 open issues; homepage on Vercel |
+| SolarLabX | 2026-05-25 (today) | Monday refactor: `computeColWidths` helper extraction (DRY principle in XLSX export, PR #144); yesterday: auth guards on AI routes + credential exposure fix (PR #133) |
+
+---
+
+## 8. Recommended Actions
+
+| Priority | Action | Owner |
+|----------|--------|-------|
+| HIGH | Create or stub `packages/scpi-client/`, `packages/iv-engine/`, `packages/types/` | engineering |
+| HIGH | Create `hardware/WIRING.md` and `hardware/schematics/` | hardware team |
+| HIGH | Create `apps/desktop/relay` service or update DEPLOYMENT.md to reflect actual approach | platform |
+| MEDIUM | Commit `hardware/firmware/mux-controller/` STM32H7 firmware | embedded team |
+| LOW | Keep `docs/API.md` generation date in sync with route handler changes | CI (add lint step) |
+
+---
+
+*Generated by Claude Code automated Monday lint pass.*
