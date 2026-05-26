@@ -50,18 +50,24 @@ surya-yantra/
 │   │   ├── lib/              # Business logic
 │   │   └── prisma/           # Database schema
 │   └── desktop/              # Electron standalone app
-├── packages/
-│   ├── scpi-client/          # ESL-Solar SCPI driver
-│   ├── iv-engine/            # IEC 60891 correction engine
-│   └── types/                # Shared TypeScript types
+│       └── relay/            # [Planned] Lab-to-cloud relay service (issue #74)
+├── packages/                 # [Planned — Milestone 2] shared monorepo packages
+│   ├── scpi-client/          # [Planned] ESL-Solar SCPI driver
+│   ├── iv-engine/            # [Planned] IEC 60891 correction engine
+│   └── types/                # [Planned] Shared TypeScript types
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
+│   ├── schematics/           # [Planned] SVG circuit diagrams (issue #86/#90)
+│   ├── firmware/             # [Planned] STM32H7 MUX controller firmware (issue #87/#92)
 │   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── WIRING.md             # [Planned] Wiring guide (issue #73/#90)
+├── drafts/                   # Research article drafts (pre-publication)
+├── posts/                    # Published research articles
 └── docs/
-    ├── PRD.md                # Product Requirements
+    ├── PRD.md                # [Planned] Product Requirements (issue #72)
     ├── API.md                # API Reference
-    └── IEC-CORRECTIONS.md    # Standards implementation
+    ├── IEC-CORRECTIONS.md    # Standards implementation
+    ├── HARDWARE-SETUP.md     # Hardware commissioning guide
+    └── DEPLOYMENT.md         # Vercel deployment guide
 ```
 
 ---
@@ -165,7 +171,7 @@ IAM(θ) = 1 - exp(-cos(θ)/ar) / (1 - exp(-1/ar))
 
 See [`hardware/BOM.md`](hardware/BOM.md) for complete Bill of Materials with online purchase links.
 
-See [`hardware/schematics/`](hardware/schematics/) for:
+See `hardware/schematics/` for circuit diagrams (**[Planned]** — tracked in issue #86):
 - System overview schematic
 - MUX relay matrix wiring
 - 4-wire Kelvin connection detail
