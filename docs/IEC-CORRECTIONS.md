@@ -217,15 +217,28 @@ a real module anomaly.
 
 ## 5. References
 
-1. IEC 60891:2021, *Photovoltaic devices — Procedures for temperature and
-   irradiance corrections to measured I-V characteristics*.
-2. IEC 60904-3:2019, *Measurement principles for terrestrial PV devices
-   with reference spectral irradiance data*.
-3. IEC 60904-7:2019, *Computation of the spectral mismatch correction for
-   measurements of photovoltaic devices*.
-4. IEC 61853-2:2016, *Photovoltaic (PV) module performance testing and
-   energy rating — Part 2: Spectral responsivity, incidence angle and
-   module operating temperature measurements*.
-5. Martin N., Ruiz J.M., *Calculation of the PV modules angular losses
-   under field conditions by means of an analytical model*, Solar Energy
-   Materials & Solar Cells 70 (2001) 25–38.
+### IEC Standards
+
+1. IEC 60891:2021 Ed.3, *Photovoltaic devices — Procedures for temperature and irradiance corrections to measured I-V characteristics*. Geneva: IEC. ISBN 978-2-8322-9875-3. [IEC Webstore](https://webstore.iec.ch/publication/66359)
+2. IEC 60904-1:2020 Ed.3, *Photovoltaic devices — Part 1: Measurement of photovoltaic current-voltage characteristics*. Geneva: IEC. [IEC Webstore](https://webstore.iec.ch/publication/62794)
+3. IEC 60904-3:2019 Ed.4, *Photovoltaic devices — Part 3: Measurement principles for terrestrial photovoltaic (PV) solar devices with reference spectral irradiance data*. Geneva: IEC. [IEC Webstore](https://webstore.iec.ch/publication/59903)
+4. IEC 60904-7:2019 Ed.4, *Photovoltaic devices — Part 7: Computation of the spectral mismatch correction for measurements of photovoltaic devices*. Geneva: IEC. [IEC Webstore](https://webstore.iec.ch/publication/64783)
+5. IEC 61853-1:2011 Ed.1, *Photovoltaic (PV) module performance testing and energy rating — Part 1: Irradiance and temperature performance measurements and power rating*. Geneva: IEC.
+6. IEC 61853-2:2016 Ed.1, *Photovoltaic (PV) module performance testing and energy rating — Part 2: Spectral responsivity, incidence angle and module operating temperature measurements*. Geneva: IEC. [IEC Webstore](https://webstore.iec.ch/publication/24311)
+7. IEC 61853-3:2018 Ed.1, *Photovoltaic (PV) module performance testing and energy rating — Part 3: Energy rating of PV modules*. Geneva: IEC. [IEC Webstore](https://webstore.iec.ch/publication/33630)
+8. IEC 61215-1:2021 Ed.2, *Terrestrial photovoltaic (PV) modules — Design qualification and type approval — Part 1: Test requirements*. Geneva: IEC.
+9. IEC 61215-2:2021 Ed.2, *Terrestrial photovoltaic (PV) modules — Design qualification and type approval — Part 2: Test procedures*. Geneva: IEC.
+
+### Peer-Reviewed Papers
+
+10. Martin N., Ruiz J.M. (2001). Calculation of the PV modules angular losses under field conditions by means of an analytical model. *Solar Energy Materials and Solar Cells*, 70(1), 25–38. https://doi.org/10.1016/S0927-0248(00)00408-6
+11. Osterwald C.R. (1986). Translation of device performance measurements to reference conditions. *Solar Cells*, 18(3–4), 269–279. https://doi.org/10.1016/0379-6787(86)90124-6
+12. Kenny R.P. et al. (2006). Performance of thin film PV modules. *Thin Solid Films*, 511–512, 663–672. https://doi.org/10.1016/j.tsf.2005.12.021
+13. Driesse A., Stein J.S. (2020). From IEC 61853 power measurements to PV system simulations. *Progress in Photovoltaics*, 28(5), 480–496. https://doi.org/10.1002/pip.3203
+14. Müllejans H. et al. (2005). Spectral mismatch in calibration of photovoltaic reference devices by global sunlight method. *Measurement Science and Technology*, 16(6), 1250–1254. https://doi.org/10.1088/0957-0233/16/6/002
+15. Virtuani A. et al. (2011). Influence of light source and temperature on the performance of different silicon PV technologies. *Progress in Photovoltaics*, 19(3), 342–354. https://doi.org/10.1002/pip.1018
+
+### Software & Data Sources
+
+16. NREL (2024). Reference Air Mass 1.5 Spectra (AM1.5G). https://www.nrel.gov/grid/solar-resource/spectra-am1.5.html (accessed 2026-05-27).
+17. Gueymard C.A. (2004). The sun's total and spectral irradiance for solar energy applications and solar radiation models. *Solar Energy*, 76(4), 423–453. https://doi.org/10.1016/j.solener.2003.08.039
