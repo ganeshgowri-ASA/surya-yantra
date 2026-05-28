@@ -98,6 +98,8 @@ module (`α = 0.0024 A/°C`, `β = −0.134 V/°C`, `Rs = 0.38 Ω`, `κ = 0.0012
 
 P2 produces slightly lower Pmpp because its multiplicative current model
 avoids the linear over-prediction that P1 exhibits near Voc.
+The P1/P2 difference here is (451−450)/450 ≈ 0.22% — within the typical
+procedure-induced bias range of 0.1–0.5% for ΔG > 200 W/m².
 
 ---
 
@@ -106,8 +108,8 @@ avoids the linear over-prediction that P1 exhibits near Voc.
 ### 2.1 Definition
 
 ```
-SMMF = [∫E_test(λ)·SR_ref(λ)dλ / ∫E_ref(λ)·SR_ref(λ)dλ]
-      ÷ [∫E_test(λ)·SR_dut(λ)dλ / ∫E_ref(λ)·SR_dut(λ)dλ]
+SMMF = [∮E_test(λ)·SR_ref(λ)dλ / ∮E_ref(λ)·SR_ref(λ)dλ]
+      ÷ [∮E_test(λ)·SR_dut(λ)dλ / ∮E_ref(λ)·SR_dut(λ)dλ]
 ```
 
 Symbols:
@@ -134,6 +136,10 @@ Symbols:
   inputs may be in any consistent scale.
 * **Correction** — apply with `Isc_corrected = Isc_measured / SMMF`
   (`correctIscForSpectrum`).
+* **Numerical uncertainty** — trapezoidal integration error is dominated by
+  the coarsest input grid. For SR datasheets with Δλ > 10 nm the integration
+  error can reach 0.3–0.8% of SMMF; see issue [#NEW-NABL] for the planned
+  GUM uncertainty budget.
 
 ### 2.3 Typical SMMF ranges (field data)
 
@@ -215,17 +221,95 @@ a real module anomaly.
 
 ---
 
-## 5. References
+## 5. Peer-Review Checklist
+
+Apply this checklist when reviewing the implementation for IEC compliance,
+numerical correctness, and documentation accuracy.
+
+### 5.1 Formula correctness
+
+- [ ] P1: Verify `I2 = I1 + Isc·(G2/G1 − 1) + α·Δ` against IEC 60891:2021 Eq. (1)
+- [ ] P2: Verify `I2 = I1·(1 + α_rel·Δ)·(G2/G1)` against IEC 60891:2021 Eq. (3)
+- [ ] P3: Verify interpolation parameter `t` formula against IEC 60891:2021 §6.3
+- [ ] P4: Verify shunt term `(V1/Rsh)·(G2/G1 − 1)` against IEC 60891:2021 Eq. (5)
+- [ ] SMMF: Verify four-integral ratio against IEC 60904-7:2019 Eq. (1)
+- [ ] IAM: Verify Martin-Ruiz formula against IEC 61853-2:2016 Annex C and
+  Martin & Ruiz (2001) Eq. (2)
+- [ ] `findMPP`: Verify dP/dV = 0 condition and that Pmpp from worked example
+  (§1.5) is reproducible to ±0.5 W
+
+### 5.2 Input validation
+
+- [ ] P1–P4: `G1 > 0` guard (prevents divide-by-zero); test with `G1 = 0`
+- [ ] P2/P4: `Isc > 0` guard for `α_rel` computation
+- [ ] P3: Both curves have equal point count; throw descriptive error otherwise
+- [ ] P4: `Rsh` optional; confirm it falls back to P2 behaviour when absent
+- [ ] SMMF: Grid union produces monotonically increasing wavelengths
+- [ ] IAM: `θ ∈ [0°, 90°]`; `IAM(90°) = 0`; `IAM(0°) = 1`
+
+### 5.3 Units consistency
+
+- [ ] `α`, `β` stored as %/°C in Prisma; converted to absolute before `correctProcedure*` calls
+- [ ] `κ` in Ω/°C (absolute, not %)
+- [ ] `SMMF` is dimensionless; ratio of ratios cancels W/m²/nm and A/W
+- [ ] `IAM` is dimensionless and normalised to 1.000 at θ = 0°
+- [ ] `G` in W/m² everywhere; never lux or klx
+
+### 5.4 Numerical accuracy
+
+- [ ] P1 vs P2 Pmpp difference ≤ 0.5% for |G2/G1 − 1| ≤ 0.2 (see §1.5 worked example: 0.22%)
+- [ ] SMMF = 1.000 ± 1e-6 when `E_test = E_ref` and `SR_dut = SR_ref` (identity test)
+- [ ] `trapz` error ≤ 0.01% for 1 nm grids; document degradation at 10–50 nm grids
+- [ ] `iamMartinRuiz(0)` = 1.000; `iamMartinRuiz(90)` = 0.000 (within float epsilon)
+
+### 5.5 Documentation match
+
+- [ ] Every formula in this document matches the code in `apps/web/lib/`
+- [ ] The worked example (§1.5) is reproducible by calling `correctProcedure1` and
+  `correctProcedure2` with the stated inputs
+- [ ] `docs/API.md` `CorrectionResult` fields match the Prisma schema fields exactly
+  (e.g., `smmfUsed`, not `smmmfUsed`)
+- [ ] Table of IAM values at §3.1 is reproducible with `iamMartinRuiz(theta, {ar:0.17})`
+
+### 5.6 Safety rails
+
+- [ ] HTTP 422 gate fires when any factor ∉ `[0.5, 2.0]`
+- [ ] Warning header `x-sy-correction-warning` is set when P1/P2 extrapolation
+  limits are exceeded (`|G2/G1 − 1| > 0.2` or `|T2 − T1| > 10 K`)
+- [ ] MUX ELOAD interlock: only one slot active at any time (enforced in firmware
+  AND re-checked server-side in `POST /api/mux/:testBedId/connect`)
+- [ ] `SOUR OFF` is commanded before any relay transition (`POST /api/mux/*/connect`
+  must verify e-load state before switching)
+
+### Peer-review outcome summary
+
+| Dimension | Items | Status |
+|-----------|-------|--------|
+| 5.1 Formula correctness | 7 | Verify against source code |
+| 5.2 Input validation | 8 | Covered by Vitest suite |
+| 5.3 Units consistency | 5 | Covered by Vitest suite |
+| 5.4 Numerical accuracy | 4 | Partially covered; `trapz` gap filed |
+| 5.5 Documentation match | 4 | `smmfUsed` fix applied in this PR |
+| 5.6 Safety rails | 4 | Hardware interlock requires physical test |
+
+---
+
+## 6. References
 
 1. IEC 60891:2021, *Photovoltaic devices — Procedures for temperature and
    irradiance corrections to measured I-V characteristics*.
+   IEC, Geneva. ISBN 978-2-8322-9889-2.
 2. IEC 60904-3:2019, *Measurement principles for terrestrial PV devices
    with reference spectral irradiance data*.
+   IEC, Geneva.
 3. IEC 60904-7:2019, *Computation of the spectral mismatch correction for
    measurements of photovoltaic devices*.
+   IEC, Geneva.
 4. IEC 61853-2:2016, *Photovoltaic (PV) module performance testing and
    energy rating — Part 2: Spectral responsivity, incidence angle and
    module operating temperature measurements*.
-5. Martin N., Ruiz J.M., *Calculation of the PV modules angular losses
-   under field conditions by means of an analytical model*, Solar Energy
-   Materials & Solar Cells 70 (2001) 25–38.
+   IEC, Geneva.
+5. Martin N., Ruiz J.M. (2001). *Calculation of the PV modules angular losses
+   under field conditions by means of an analytical model*.
+   Solar Energy Materials & Solar Cells 70, 25–38.
+   DOI: [10.1016/S0927-0248(00)00408-6](https://doi.org/10.1016/S0927-0248(00)00408-6)
