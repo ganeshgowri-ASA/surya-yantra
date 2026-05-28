@@ -115,8 +115,8 @@ If any call returns 5xx check **Deployments → Functions → Logs**.
 ## 8. Hardware connectivity
 
 The lab's ESL-Solar 500 and MUX matrix are **not** reachable from Vercel
-directly. Deploy the lightweight relay service (`apps/desktop/relay`) on
-a lab PC and expose it to the internet via:
+directly. Deploy the lightweight relay service (`apps/desktop/relay`
+[Planned: issue #91]) on a lab PC and expose it to the internet via:
 
 * **Cloudflare Tunnel** (recommended, free, no inbound firewall)
 * **Tailscale Funnel** (simple, uses your tailnet)
@@ -144,8 +144,11 @@ Vercel keeps all previous deployments. To roll back:
 * Enable **Vercel Analytics** and **Web Vitals**.
 * Connect **Sentry** for error reporting (`SENTRY_DSN` env var).
 * Add an **Uptime** check on `/api/health` with a 1-minute interval.
-* The AI diagnostics route (`/api/ai/chat`) runs as an Edge Function by
-  default — watch the streaming budget on the Anthropic / OpenAI side.
+* The AI diagnostics route (`/api/ai/chat`) streams `text/event-stream` chunks
+  and **must use the Node.js runtime** — not the Vercel Edge runtime — because
+  Prisma ORM requires Node.js native APIs (`fs`, `net`, `tls`). Ensure the
+  route file exports `export const runtime = 'nodejs'`. Edge Functions that
+  import Prisma will fail at build time with a `prisma/client` bundling error.
 
 ---
 
