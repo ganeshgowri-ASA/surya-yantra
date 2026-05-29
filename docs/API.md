@@ -11,16 +11,29 @@ Complete reference for the REST/JSON endpoints exposed by the Next.js app under
 
 ## Table of Contents
 
-1. [Authentication](#authentication)
-2. [Modules & Registry](#modules--registry)
-3. [Test Sessions](#test-sessions)
-4. [IV Measurements](#iv-measurements)
-5. [IEC Correction Engine](#iec-correction-engine)
-6. [Environmental Data](#environmental-data)
-7. [MUX Matrix Control](#mux-matrix-control)
-8. [Reports](#reports)
-9. [AI Diagnostics](#ai-diagnostics)
-10. [Library API (internal)](#library-api-internal)
+1. [Health](#health)
+2. [Authentication](#authentication)
+3. [Modules & Registry](#modules--registry)
+4. [Test Sessions](#test-sessions)
+5. [IV Measurements](#iv-measurements)
+6. [IEC Correction Engine](#iec-correction-engine)
+7. [Environmental Data](#environmental-data)
+8. [MUX Matrix Control](#mux-matrix-control)
+9. [Reports](#reports)
+10. [AI Diagnostics](#ai-diagnostics)
+11. [Library API (internal)](#library-api-internal)
+
+---
+
+## Health
+
+```
+GET /api/health
+```
+
+Liveness probe — returns `200 { "status": "ok" }` even if the database is
+unreachable (liveness, not readiness). Vercel Uptime and the Cloudflare
+tunnel health check target this endpoint.
 
 ---
 
@@ -156,7 +169,7 @@ Response is the `CorrectionResult` record:
   "betaUsed": -0.00244,
   "rsUsed": 0.38,
   "kappaUsed": 0.0012,
-  "smmmfUsed": 1.013,
+  "smmfUsed": 1.013,
   "iamUsed": 0.963,
   "deltaI": 1.985,
   "deltaV": -0.64
@@ -174,11 +187,30 @@ POST /api/corrections/p3
 POST /api/corrections/p4
 POST /api/corrections/smmf
 POST /api/corrections/iam
+POST /api/corrections/apply
 ```
 
-All endpoints accept POSTed JSON and return a corrected `IVCurve` (or scalar
-factor for `smmf`/`iam`). See [`IEC-CORRECTIONS.md`](./IEC-CORRECTIONS.md) for
-the algorithmic details.
+All individual procedure endpoints accept POSTed JSON and return a corrected
+`IVCurve` (or scalar factor for `smmf`/`iam`). See
+[`IEC-CORRECTIONS.md`](./IEC-CORRECTIONS.md) for the algorithmic details.
+
+`POST /api/corrections/apply` runs the full pipeline in order (IAM → SMMF →
+IEC 60891) and returns the STC-corrected curve plus extracted parameters:
+
+```json
+{
+  "procedure": "IEC60891_P2",
+  "applySmmf": true,
+  "applyIam": true,
+  "target": { "irradiance": 1000, "temperature": 25 },
+  "aoiBeamDeg": 30,
+  "gBeam": 700,
+  "gDiffuse": 120,
+  "gAlbedo": 4
+}
+```
+
+Returns HTTP 422 if any intermediate factor is outside `[0.5, 2.0]`.
 
 Example — `POST /api/corrections/p3`:
 
@@ -212,6 +244,7 @@ GET  /api/mux/:testBedId
 POST /api/mux/:testBedId/connect
 POST /api/mux/:testBedId/disconnect
 POST /api/mux/:testBedId/reset
+POST /api/mux/:testBedId/selftest
 ```
 
 `connect` body:
@@ -227,6 +260,11 @@ POST /api/mux/:testBedId/reset
 
 The server verifies that only **one** `ELOAD`-bound slot is active at any time,
 and refuses conflicting requests with `409 Conflict`.
+
+`selftest` cycles every relay twice and reports coil continuity and contact
+resistance per slot (`< 5 mΩ` OK, `5–20 mΩ` marginal, `> 20 mΩ` fail).
+See [`HARDWARE-SETUP.md §4.4`](./HARDWARE-SETUP.md) for the underlying
+hardware behaviour.
 
 ---
 
@@ -256,12 +294,13 @@ GET  /api/ai/conversations/:sessionId
 {
   "sessionId": "clx-sess-001",
   "moduleId": "clx-m-042",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "message": "Explain why Isc dropped 6% after the last sweep."
 }
 ```
 
-Streams `text/event-stream` chunks.
+Streams `text/event-stream` chunks. This route **must** use the Node.js runtime
+(not Vercel Edge Functions) because Prisma ORM requires Node.js APIs.
 
 ---
 
@@ -295,7 +334,7 @@ unionGrid(...series)                            → number[]
 
 ```ts
 iamMartinRuiz(thetaDeg, { ar?, radians? })      → number
-iamCurve(thetasDeg, { ar? })                    → number[]
+iamCurve(thetasDeg, { ar? })                    → number[]  
 applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 ```
 
@@ -316,4 +355,4 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+*Updated 2026-05-29. Update alongside any change to route handlers.*

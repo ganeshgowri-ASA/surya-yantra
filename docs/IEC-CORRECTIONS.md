@@ -215,7 +215,36 @@ a real module anomaly.
 
 ---
 
-## 5. References
+## 5. Cross-System Integration — Surya Yantra → Agnipariksha
+
+The STC-corrected `Pmpp` produced by this pipeline serves as the **Pmax(0)
+baseline** for reliability tests in Agnipariksha (IEC TS 63342 LeTID,
+IEC 61730-2 RCOT). The handoff is via the `measurementId` foreign key
+embedded in every `CorrectionResult` record, enabling full provenance
+tracking from raw IV scan to qualification verdict.
+
+See the article seed `drafts/article-seed-iv-to-verdict-chain.md` for the
+full research narrative.
+
+---
+
+## 6. Peer-Review Checklist (Thursday)
+
+Apply the full checklist in [`docs/PEER-REVIEW-CHECKLIST.md`](./PEER-REVIEW-CHECKLIST.md)
+before merging any PR that touches this module. Summary of the most
+critical checks:
+
+| Check | What can go wrong |
+|-------|-------------------|
+| P1 vs P2 linear over-prediction | P1 overestimates Pmpp by ~0.2 % for large ΔG; always prefer P2 outdoors |
+| `alphaPct` unit conversion | Failing to multiply by STC Isc gives a factor-of-1000 error in ΔI |
+| `smmmfUsed` typo | The triple-m field name was a copy-paste error in v1; check `smmfUsed` (double m) is used everywhere |
+| IAM on indoor tests | Applying IAM to flash measurements inflates Isc by up to 1 %; guard with `loadMode` check |
+| Factor bounds `[0.5, 2.0]` | The 422 abort must fire before returning corrected data, not after |
+
+---
+
+## 7. References
 
 1. IEC 60891:2021, *Photovoltaic devices — Procedures for temperature and
    irradiance corrections to measured I-V characteristics*.
