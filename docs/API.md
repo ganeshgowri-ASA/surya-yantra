@@ -12,15 +12,16 @@ Complete reference for the REST/JSON endpoints exposed by the Next.js app under
 ## Table of Contents
 
 1. [Authentication](#authentication)
-2. [Modules & Registry](#modules--registry)
-3. [Test Sessions](#test-sessions)
-4. [IV Measurements](#iv-measurements)
-5. [IEC Correction Engine](#iec-correction-engine)
-6. [Environmental Data](#environmental-data)
-7. [MUX Matrix Control](#mux-matrix-control)
-8. [Reports](#reports)
-9. [AI Diagnostics](#ai-diagnostics)
-10. [Library API (internal)](#library-api-internal)
+2. [Health](#health)
+3. [Modules & Registry](#modules--registry)
+4. [Test Sessions](#test-sessions)
+5. [IV Measurements](#iv-measurements)
+6. [IEC Correction Engine](#iec-correction-engine)
+7. [Environmental Data](#environmental-data)
+8. [MUX Matrix Control](#mux-matrix-control)
+9. [Reports](#reports)
+10. [AI Diagnostics](#ai-diagnostics)
+11. [Library API (internal)](#library-api-internal)
 
 ---
 
@@ -42,6 +43,29 @@ POST /api/auth/logout
 ```
 
 Clears the session cookie and revokes the JWT.
+
+---
+
+## Health
+
+```
+GET /api/health
+```
+
+No authentication required. Used by the deployment smoke test
+([`DEPLOYMENT.md`](./DEPLOYMENT.md) §7) and uptime monitors.
+
+Response `200`:
+
+```json
+{ "status": "ok", "db": "ok", "version": "1.0.0" }
+```
+
+If the database connection fails the response is `503`:
+
+```json
+{ "status": "degraded", "db": "error", "detail": "connection refused" }
+```
 
 ---
 
@@ -156,7 +180,7 @@ Response is the `CorrectionResult` record:
   "betaUsed": -0.00244,
   "rsUsed": 0.38,
   "kappaUsed": 0.0012,
-  "smmmfUsed": 1.013,
+  "smmfUsed": 1.013,
   "iamUsed": 0.963,
   "deltaI": 1.985,
   "deltaV": -0.64
@@ -174,11 +198,28 @@ POST /api/corrections/p3
 POST /api/corrections/p4
 POST /api/corrections/smmf
 POST /api/corrections/iam
+POST /api/corrections/apply
 ```
 
-All endpoints accept POSTed JSON and return a corrected `IVCurve` (or scalar
-factor for `smmf`/`iam`). See [`IEC-CORRECTIONS.md`](./IEC-CORRECTIONS.md) for
-the algorithmic details.
+The individual `/p1`–`/p4`, `/smmf`, and `/iam` endpoints accept POSTed JSON and
+return a corrected `IVCurve` (or scalar factor for `smmf`/`iam`).
+See [`IEC-CORRECTIONS.md`](./IEC-CORRECTIONS.md) for the algorithmic details.
+
+`POST /api/corrections/apply` is the **consolidated pipeline** endpoint that applies
+IAM → SMMF → IEC 60891 in sequence (see `IEC-CORRECTIONS.md §4`):
+
+```json
+{
+  "measurementId": "clx-m-042",
+  "procedure": "IEC60891_P2",
+  "target": { "irradiance": 1000, "temperature": 25 },
+  "applySmmf": true,
+  "applyIam": true,
+  "aoiBeamDeg": 32.5
+}
+```
+
+Aborts with HTTP `422` if any intermediate factor falls outside `[0.5, 2.0]`.
 
 Example — `POST /api/corrections/p3`:
 
@@ -212,6 +253,7 @@ GET  /api/mux/:testBedId
 POST /api/mux/:testBedId/connect
 POST /api/mux/:testBedId/disconnect
 POST /api/mux/:testBedId/reset
+POST /api/mux/:testBedId/selftest
 ```
 
 `connect` body:
@@ -227,6 +269,21 @@ POST /api/mux/:testBedId/reset
 
 The server verifies that only **one** `ELOAD`-bound slot is active at any time,
 and refuses conflicting requests with `409 Conflict`.
+
+`POST /api/mux/:testBedId/selftest` cycles every relay twice and returns coil
+continuity and contact resistance per slot:
+
+```json
+{
+  "total": 300,
+  "passed": 298,
+  "failed": [
+    { "slot": 14, "lane": "FORCE_POS", "contactResistanceOhm": 0.025, "status": "MARGINAL" }
+  ]
+}
+```
+
+Contact resistance thresholds: `< 0.005 Ω` OK, `0.005–0.020 Ω` MARGINAL, `> 0.020 Ω` FAIL.
 
 ---
 
@@ -256,12 +313,16 @@ GET  /api/ai/conversations/:sessionId
 {
   "sessionId": "clx-sess-001",
   "moduleId": "clx-m-042",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "message": "Explain why Isc dropped 6% after the last sweep."
 }
 ```
 
 Streams `text/event-stream` chunks.
+
+> **Runtime note:** This route uses the Node.js runtime (`export const runtime = 'nodejs'`),
+> not the Edge runtime. Prisma ORM requires Node.js native APIs and cannot run in the
+> Vercel Edge network. See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for details.
 
 ---
 
@@ -313,7 +374,8 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 | 422    | Measurement below quality threshold                  |
 | 500    | Unhandled server error (check `req_id` in response)  |
 | 502    | ESL-Solar / MUX driver timeout                       |
+| 503    | Database unhealthy (see `GET /api/health`)            |
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+*Last lint pass 2026-05-30.*
