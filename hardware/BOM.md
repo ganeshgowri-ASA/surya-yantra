@@ -1,3 +1,24 @@
+---
+title: "Bill of Materials — Srishti PV Lab 75-Module Test Bed"
+description: "Complete India BOM for the Surya Yantra PV IV curve tracer: ESL-Solar 500 electronic load, Omron G9EA relay matrix, Kipp & Zonen pyranometer, Pt-100 cell-temperature sensors, Intel NUC lab PC, and safety hardware. Prices in INR as of April 2026."
+keywords:
+  - PV test bed BOM
+  - ESL-Solar 500 price India
+  - Omron G9EA relay
+  - Kipp Zonen SMP10 India
+  - IMT Si-RS485TC India
+  - IV curve tracer components
+  - solar lab procurement
+  - Srishti PV Lab
+  - Kelvin sensing cable
+  - IEC 61010 safety hardware
+date: 2026-04-17
+last_reviewed: 2026-05-31
+canonical: "https://surya-yantra.srishtipvlab.in/docs/bom"
+og_image: "/og/bom.png"
+author: "Srishti PV Lab procurement desk"
+---
+
 # Surya Yantra — Complete Bill of Materials
 
 All prices are indicative **India MRP in INR, excluding GST**, collected in
@@ -157,4 +178,4 @@ Totals at the bottom. Quantities are for a single 75-module test bed.
 
 ---
 
-*Last updated 2026-04-17 · Srishti PV Lab procurement desk.*
+*Last updated 2026-04-17. Reviewed 2026-05-31 · Srishti PV Lab procurement desk.*

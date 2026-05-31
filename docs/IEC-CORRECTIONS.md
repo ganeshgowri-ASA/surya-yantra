@@ -1,3 +1,27 @@
+---
+title: "IEC Correction Algorithms — Implementation Notes"
+description: "How Surya Yantra implements IEC 60891:2021 temperature & irradiance corrections, IEC 60904-7:2019 spectral mismatch factor, and IEC 61853-2:2016 Martin-Ruiz incidence-angle modifier for PV IV curve tracing at Srishti PV Lab."
+keywords:
+  - IEC 60891
+  - IEC 60904-7
+  - IEC 61853-2
+  - IV curve correction
+  - temperature correction
+  - irradiance correction
+  - spectral mismatch factor
+  - SMMF
+  - incidence angle modifier
+  - IAM Martin-Ruiz
+  - PV module testing
+  - STC correction
+  - Srishti PV Lab
+date: 2026-04-17
+last_reviewed: 2026-05-31
+canonical: "https://surya-yantra.srishtipvlab.in/docs/iec-corrections"
+og_image: "/og/iec-corrections.png"
+author: "Srishti PV Lab"
+---
+
 # IEC Correction Algorithms — Implementation Notes
 
 This document describes **how** Surya Yantra implements the corrections

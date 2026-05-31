@@ -1,3 +1,26 @@
+---
+title: "Hardware Setup Guide — Srishti PV Lab 75-Module Test Bed"
+description: "Step-by-step assembly guide for the Srishti PV Lab 75-module PV IV curve test bed: ESL-Solar 500 electronic load, 300-relay MUX matrix, 4-wire Kelvin sensing, environmental sensors (Kipp & Zonen, IMT, Sensirion), and 19-inch rack layout."
+keywords:
+  - PV IV curve test bed
+  - ESL-Solar 500
+  - MUX relay matrix
+  - 4-wire Kelvin sensing
+  - Kipp Zonen SMP10
+  - IMT Si-RS485TC
+  - Omron G9EA relay
+  - IEC 61010 safety
+  - solar lab hardware
+  - Srishti PV Lab
+  - SCPI electronic load
+  - Modbus RTU sensor
+date: 2026-04-17
+last_reviewed: 2026-05-31
+canonical: "https://surya-yantra.srishtipvlab.in/docs/hardware-setup"
+og_image: "/og/hardware-setup.png"
+author: "Srishti PV Lab"
+---
+
 # Hardware Setup Guide
 
 Step-by-step instructions for assembling the Srishti PV Lab 75-module test

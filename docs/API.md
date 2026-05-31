@@ -1,3 +1,24 @@
+---
+title: "Surya Yantra API Reference"
+description: "Complete REST/JSON API reference for Surya Yantra PV IV curve tracer: authentication, module registry, test sessions, IV measurements, IEC correction engine, MUX matrix control, AI diagnostics, and report generation."
+keywords:
+  - Surya Yantra API
+  - IV curve tracer API
+  - IEC 60891 REST API
+  - PV module testing API
+  - SCPI electronic load
+  - MUX matrix control
+  - AI diagnostics PV
+  - Next.js API routes
+  - Srishti PV Lab
+  - solar IV measurement
+date: 2026-04-17
+last_reviewed: 2026-05-31
+canonical: "https://surya-yantra.srishtipvlab.in/docs/api"
+og_image: "/og/api-reference.png"
+author: "Srishti PV Lab"
+---
+
 # Surya Yantra — API Reference
 
 Complete reference for the REST/JSON endpoints exposed by the Next.js app under
@@ -256,7 +277,7 @@ GET  /api/ai/conversations/:sessionId
 {
   "sessionId": "clx-sess-001",
   "moduleId": "clx-m-042",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "message": "Explain why Isc dropped 6% after the last sweep."
 }
 ```
@@ -316,4 +337,4 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+*Generated 2026-04-17. Last reviewed 2026-05-31. Update alongside any change to route handlers.*

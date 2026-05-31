@@ -1,3 +1,24 @@
+---
+title: "Deployment Guide — Vercel"
+description: "Step-by-step guide for deploying Surya Yantra PV IV curve tracer to Vercel with managed PostgreSQL, environment secrets, hardware relay tunnel, and monitoring setup for Srishti PV Lab."
+keywords:
+  - Vercel deployment
+  - Next.js deployment
+  - PostgreSQL Neon Supabase
+  - Surya Yantra setup
+  - PV lab software deployment
+  - Cloudflare Tunnel
+  - Prisma migration
+  - ESL-Solar 500 relay
+  - Srishti PV Lab
+  - SCPI over tunnel
+date: 2026-04-17
+last_reviewed: 2026-05-31
+canonical: "https://surya-yantra.srishtipvlab.in/docs/deployment"
+og_image: "/og/deployment-guide.png"
+author: "Srishti PV Lab"
+---
+
 # Deployment Guide — Vercel
 
 This guide walks through deploying the Surya Yantra web app (`apps/web`) to
@@ -43,7 +64,7 @@ In **Project Settings → Environment Variables** add:
 | `DATABASE_URL`          | Production+Preview | `postgres://user:pass@host/db?sslmode=require` |
 | `DIRECT_URL`            | Production+Preview | Same as above, bypassing any PgBouncer  |
 | `NEXTAUTH_SECRET`       | Production+Preview | `openssl rand -base64 32`               |
-| `NEXTAUTH_URL`          | Production         | `https://surya-yantra.vercel.app`       |
+| `NEXTAUTH_URL`          | Production         | `https://surya-yantra.srishtipvlab.in`  |
 | `ANTHROPIC_API_KEY`     | Production+Preview | `sk-ant-…`                              |
 | `OPENAI_API_KEY`        | Production+Preview | `sk-…` (optional)                       |
 | `ESL_SOLAR_HOST`        | Production         | `192.168.1.40` (lab-side gateway)       |
