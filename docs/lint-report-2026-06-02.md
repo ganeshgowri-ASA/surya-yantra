@@ -1,0 +1,139 @@
+# Structural Lint Report — 2026-06-02
+
+**Run date:** 2026-06-02 (Monday, W23 weekly angle: outline)  
+**Branch:** claude/wizardly-lovelace-XOz6o  
+**Scope:** `docs/`, `hardware/BOM.md`, `README.md`  
+**No `drafts/` or `posts/` existed before this session** (both created in this PR).
+
+---
+
+## Summary
+
+| ID | Category | File | Auto-fixed | Issue filed |
+|---|---|---|---|---|
+| LNT-001 | Typo | `docs/API.md:159` | ✅ | — |
+| LNT-002 | Stale date | `docs/API.md:319`, `hardware/BOM.md:160` | — | ✅ |
+| LNT-003 | Broken internal ref | `README.md:44-65,167-172` | — | ✅ |
+| LNT-004 | Broken internal ref | `docs/DEPLOYMENT.md:119` | — | ✅ |
+| LNT-005 | Missing doc | `apps/web/app/api/ws/route.ts` (undocumented) | — | ✅ |
+
+**Headings hierarchy:** ✅ all docs clean (no skipped H levels)  
+**Citation coverage:** ✅ IEC-CORRECTIONS.md has 5 formal references; BOM.md has per-row vendor links  
+**Alt-text on figures:** ✅ no embedded images in any doc (all diagrams use ASCII tables or code blocks)  
+**Broken external links:** not checked (requires network; flag for CI integration)
+
+---
+
+## Findings
+
+### LNT-001 · Typo in `docs/API.md` — `smmmfUsed` (triple-m) · AUTO-FIXED
+
+**File:** `docs/API.md:159`  
+**Before:** `"smmmfUsed": 1.013,`  
+**After:** `"smmfUsed": 1.013,`  
+
+SMMF = Spectral Mismatch Factor (IEC 60904-7:2019). The response field name had
+a spurious third `m`. Fixed in this PR.
+
+---
+
+### LNT-002 · Stale footer dates · ISSUE FILED
+
+**Files:**
+- `docs/API.md:319` — *"Generated 2026-04-17"* (47 days old)
+- `hardware/BOM.md:160` — *"Last updated 2026-04-17"*
+
+Both documents have been referenced in subsequent development but their footer
+timestamps were never updated. BOM prices are flagged as "valid as of April 2026"
+which is now materially stale for procurement decisions.
+
+---
+
+### LNT-003 · `README.md` references 5 non-existent paths · ISSUE FILED
+
+**File:** `README.md:44–65` (repo structure tree) and `README.md:167–172` (hardware section)  
+
+The following paths are listed in the README but do not exist in the actual repository:
+
+| Path | Description in README |
+|---|---|
+| `packages/scpi-client/` | ESL-Solar SCPI driver |
+| `packages/iv-engine/` | IEC 60891 correction engine |
+| `packages/types/` | Shared TypeScript types |
+| `hardware/schematics/` | SVG circuit diagrams |
+| `hardware/WIRING.md` | Wiring guide |
+
+The SCPI driver and IV engine code currently live inside `apps/web/lib/` and
+`apps/web/app/api/` rather than as separate packages. The schematics and wiring
+guide have not been created.
+
+**Options:** create the missing files, refactor into the documented package structure,
+or remove the references from README.md.
+
+---
+
+### LNT-004 · `DEPLOYMENT.md` references `apps/desktop/relay` which does not exist · ISSUE FILED
+
+**File:** `docs/DEPLOYMENT.md:119`  
+
+Section 8 (Hardware Connectivity) instructs:
+> Deploy the lightweight relay service (`apps/desktop/relay`) on a lab PC…
+
+`apps/desktop/` contains only the Electron shell (`electron/`, `resources/`,
+`shared/`, config files). There is no `relay` subdirectory or service. The
+cloudflare-tunnel / Tailscale approach referenced immediately after is sound;
+the relay service itself needs to be built or the reference updated.
+
+---
+
+### LNT-005 · `/api/ws` WebSocket endpoint undocumented · ISSUE FILED
+
+**Existing files:**
+- `apps/web/app/api/ws/route.ts` — WebSocket upgrade handler
+- `apps/web/lib/websocket-server.ts` — server-side IV stream broadcaster
+- `apps/web/hooks/useIVStream.ts` — client-side consumer
+- `apps/web/types/iv-stream.ts` — message types
+
+`docs/API.md` lists 9 endpoint groups but has no entry for `GET /api/ws`.
+This is the real-time IV data channel used by the Dashboard and IV Tracer
+screens. Without documentation, integrators cannot consume the stream correctly
+(message schema, auth header requirements, reconnect behaviour).
+
+---
+
+## Heading Hierarchy Check
+
+| Document | H1 | H2 | H3 | Pass |
+|---|---|---|---|---|
+| `docs/API.md` | 1 | 11 | 0 | ✅ |
+| `docs/IEC-CORRECTIONS.md` | 1 | 5 | 14 | ✅ |
+| `docs/DEPLOYMENT.md` | 1 | 11 | 0 | ✅ |
+| `hardware/BOM.md` | 1 | 9 | 0 | ✅ |
+
+No skipped heading levels detected.
+
+---
+
+## Citation Coverage
+
+| Document | Formal references | Status |
+|---|---|---|
+| `docs/IEC-CORRECTIONS.md` | 5 (IEC 60891, 60904-3, 60904-7, 61853-2, Martin-Ruiz 2001) | ✅ |
+| `docs/API.md` | Inline cross-refs only | ✅ (operational doc) |
+| `docs/DEPLOYMENT.md` | None required | ✅ (operational doc) |
+| `hardware/BOM.md` | Vendor links per row | ✅ |
+| `docs/HARDWARE-SETUP.md` | Not checked in this pass | — |
+
+---
+
+## Next Steps
+
+- [ ] Wire an external link checker (e.g. `lychee`) into GitHub Actions to auto-catch broken URLs
+- [ ] Resolve LNT-003: decide between monorepo packages refactor vs README update
+- [ ] Resolve LNT-004: build or stub `apps/desktop/relay`
+- [ ] Resolve LNT-005: add `/api/ws` WebSocket section to API.md
+- [ ] Update footer dates in API.md and BOM.md (LNT-002)
+
+---
+
+*Generated by claude/wizardly-lovelace-XOz6o · 2026-06-02*
