@@ -156,7 +156,7 @@ Response is the `CorrectionResult` record:
   "betaUsed": -0.00244,
   "rsUsed": 0.38,
   "kappaUsed": 0.0012,
-  "smmmfUsed": 1.013,
+  "smmfUsed": 1.013,
   "iamUsed": 0.963,
   "deltaI": 1.985,
   "deltaV": -0.64
@@ -256,7 +256,7 @@ GET  /api/ai/conversations/:sessionId
 {
   "sessionId": "clx-sess-001",
   "moduleId": "clx-m-042",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "message": "Explain why Isc dropped 6% after the last sweep."
 }
 ```
