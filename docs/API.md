@@ -20,7 +20,8 @@ Complete reference for the REST/JSON endpoints exposed by the Next.js app under
 7. [MUX Matrix Control](#mux-matrix-control)
 8. [Reports](#reports)
 9. [AI Diagnostics](#ai-diagnostics)
-10. [Library API (internal)](#library-api-internal)
+10. [WebSocket - Live IV Stream](#websocket---live-iv-stream)
+11. [Library API (internal)](#library-api-internal)
 
 ---
 
@@ -262,6 +263,154 @@ GET  /api/ai/conversations/:sessionId
 ```
 
 Streams `text/event-stream` chunks.
+
+---
+
+## WebSocket - Live IV Stream
+
+The live IV stream uses **Socket.IO** on the `/api/ws` path:
+
+```http
+GET /api/ws
+Upgrade: websocket
+```
+
+Notes:
+
+- Browser clients should use the Socket.IO client, not a raw `WebSocket`
+  constructor.
+- The server enables both `websocket` and `polling` transports on `/api/ws`.
+- A plain `GET /api/ws` request returns endpoint metadata.
+- `POST /api/ws` returns `405` and instructs the client to use the Socket.IO
+  handshake instead.
+- Environments without a stateful Node HTTP server can return `501` for
+  `GET /api/ws`.
+
+### Connection
+
+Same-origin browser clients connect with:
+
+```ts
+import { io } from 'socket.io-client';
+
+const socket = io(window.location.origin, {
+  path: '/api/ws',
+  transports: ['websocket', 'polling'],
+});
+```
+
+The server emits:
+
+| Event | Payload | Meaning |
+| --- | --- | --- |
+| `iv:meta` | [`IVStreamMeta`](#message-schema) | Session metadata before point streaming begins |
+| `iv:point` | [`IVStreamPoint`](#message-schema) | One streamed IV sample |
+| `iv:batch` | `IVStreamPoint[]` | Replay buffer for late subscribers |
+| `iv:end` | `string` | End-of-stream reason |
+| `iv:error` | [`IVStreamError`](#message-schema) | Recoverable or terminal stream error |
+
+The client sends:
+
+| Event | Payload | Meaning |
+| --- | --- | --- |
+| `iv:subscribe` | `sessionId: string` | Join the room for one test session |
+| `iv:unsubscribe` | `sessionId: string` | Leave that session room |
+| `iv:pause` | none | Pause local rendering while keeping the socket open |
+| `iv:resume` | none | Resume rendering and flush buffered points |
+
+### Authentication
+
+`/api/ws` does not define a WebSocket-specific login event or alternate auth
+payload. Clients connect within the app's existing authentication context:
+
+- Browser clients rely on the session already established before the Socket.IO
+  connection opens.
+- External or desktop clients should use the repository's normal integration
+  auth model before opening the stream rather than a separate `/api/ws`
+  credential exchange.
+
+### Message schema
+
+#### `IVStreamMeta`
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `sessionId` | `string` | Test session identifier used for subscription rooms |
+| `moduleSerial` | `string \| undefined` | Optional module serial number |
+| `loadMode` | `'CC' \| 'CV' \| 'CR' \| 'CP' \| 'MPP_TRACK' \| 'MPP_SCAN' \| 'IV_SWEEP'` | Active load mode |
+| `startV` | `number` | Sweep start voltage |
+| `stopV` | `number` | Sweep stop voltage |
+| `stepCount` | `number` | Planned number of points |
+| `sampleRateHz` | `number` | Stream cadence |
+| `startedAt` | `number` | Unix timestamp in milliseconds |
+
+#### `IVStreamPoint`
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `t` | `number` | Unix timestamp in milliseconds |
+| `seq` | `number` | Monotonic sequence number |
+| `voltage` | `number` | Measured volts |
+| `current` | `number` | Measured amps |
+| `power` | `number` | Derived watts |
+
+#### `IVStreamError`
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `code` | `string` | Machine-readable error code |
+| `message` | `string` | Human-readable error message |
+| `recoverable` | `boolean` | Whether the client should keep retrying |
+| `at` | `number` | Unix timestamp in milliseconds |
+
+### Reconnect behavior
+
+The shared `useIVStream()` hook enables automatic reconnection with:
+
+- `reconnection: true`
+- `reconnectionDelay: 500`
+- `reconnectionDelayMax: 15000`
+- `randomizationFactor: 0.5`
+- effectively unbounded reconnect attempts by default
+
+If reconnect attempts are exhausted, the hook surfaces a `RECONNECT_FAILED`
+error and transitions to `error`.
+
+Status transitions exposed by the hook are:
+
+```text
+idle -> connecting -> connected -> streaming -> paused | reconnecting | closed | error
+```
+
+Late subscribers also receive cached state:
+
+- the latest `iv:meta`
+- a replay `iv:batch` of buffered points
+- the final `iv:end` reason if the session already ended
+
+### Hook usage example
+
+```tsx
+import useIVStream from '../hooks/useIVStream';
+
+export function LivePreview({ sessionId }: { sessionId: string }) {
+  const { status, points, meta, pause, resume, reconnect } = useIVStream({
+    sessionId,
+    maxPoints: 5000,
+  });
+
+  return (
+    <section>
+      <p>{status}</p>
+      <p>{meta?.loadMode ?? 'waiting for metadata'}</p>
+      <p>{points.length} points received</p>
+      <button onClick={pause}>Pause</button>
+      <button onClick={resume}>Resume</button>
+      <button onClick={reconnect}>Reconnect</button>
+    </section>
+  );
+}
+```
 
 ---
 
