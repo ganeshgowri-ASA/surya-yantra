@@ -47,20 +47,20 @@ surya-yantra/
 │   ├── web/                  # Next.js 14 Web App (Vercel)
 │   │   ├── app/              # App Router pages
 │   │   ├── components/       # UI components
+│   │   ├── hooks/            # Client-side data hooks
 │   │   ├── lib/              # Business logic
-│   │   └── prisma/           # Database schema
+│   │   ├── prisma/           # Database schema
+│   │   └── __tests__/        # Vitest test setup
 │   └── desktop/              # Electron standalone app
-├── packages/
-│   ├── scpi-client/          # ESL-Solar SCPI driver
-│   ├── iv-engine/            # IEC 60891 correction engine
-│   └── types/                # Shared TypeScript types
+│       ├── electron/         # Main + preload processes
+│       └── shared/           # Desktop-only shared notes
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
 │   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── (additional setup docs planned)
 └── docs/
-    ├── PRD.md                # Product Requirements
     ├── API.md                # API Reference
+    ├── DEPLOYMENT.md         # Vercel deployment runbook
+    ├── HARDWARE-SETUP.md     # Rack, wiring, and commissioning guide
     └── IEC-CORRECTIONS.md    # Standards implementation
 ```
 
@@ -165,11 +165,8 @@ IAM(θ) = 1 - exp(-cos(θ)/ar) / (1 - exp(-1/ar))
 
 See [`hardware/BOM.md`](hardware/BOM.md) for complete Bill of Materials with online purchase links.
 
-See [`hardware/schematics/`](hardware/schematics/) for:
-- System overview schematic
-- MUX relay matrix wiring
-- 4-wire Kelvin connection detail
-- 19" rack layout drawing
+See [`docs/HARDWARE-SETUP.md`](docs/HARDWARE-SETUP.md) for the published rack layout,
+Kelvin wiring, relay-matrix overview, and commissioning checklist.
 
 ---
 
