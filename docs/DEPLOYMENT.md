@@ -115,14 +115,16 @@ If any call returns 5xx check **Deployments → Functions → Logs**.
 ## 8. Hardware connectivity
 
 The lab's ESL-Solar 500 and MUX matrix are **not** reachable from Vercel
-directly. Deploy the lightweight relay service (`apps/desktop/relay`) on
-a lab PC and expose it to the internet via:
+directly. Run a small lab-side gateway on a PC inside the rack network and
+expose it to the internet via:
 
 * **Cloudflare Tunnel** (recommended, free, no inbound firewall)
 * **Tailscale Funnel** (simple, uses your tailnet)
 * **ngrok** (fastest to set up, paid plan for persistent URLs)
 
-The web app then hits `MUX_DRIVER_URL` which points at the tunnel endpoint.
+The web app then hits `MUX_DRIVER_URL`, which should point at that tunnel
+endpoint. The gateway implementation is deployment-specific and is not
+published in this repository yet.
 
 ---
 

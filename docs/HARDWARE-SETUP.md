@@ -129,8 +129,9 @@ Lab PC ──USB── Modbus RTU ──► MUX controller (STM32H7) ──►
              I²C I/O expanders (MCP23017, 18×) ──► relay coils (24 V DC)
 ```
 
-The controller firmware lives in `hardware/firmware/mux-controller/` (not in
-this documentation repo yet).
+The controller firmware is managed outside this repository. Keep the Modbus
+map and safety interlocks in sync with the deployed controller build used by
+the lab.
 
 ### 4.3 Wiring terminal blocks
 
