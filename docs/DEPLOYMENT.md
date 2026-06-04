@@ -163,3 +163,16 @@ Vercel keeps all previous deployments. To roll back:
 ---
 
 *Maintained by the Srishti PV Lab platform team.*
+
+---
+
+## 12. References
+
+1. Vercel (2026). *Next.js on Vercel*. https://vercel.com/docs/frameworks/nextjs
+2. Prisma (2026). *prisma migrate deploy — Prisma CLI Reference*. https://www.prisma.io/docs/orm/reference/prisma-cli-reference#migrate-deploy
+3. Internet Security Research Group (2026). *Let's Encrypt: How It Works*. https://letsencrypt.org/how-it-works/
+4. Cloudflare (2026). *Cloudflare Tunnel Documentation*. https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/
+5. Sentry (2026). *Sentry for Next.js*. https://docs.sentry.io/platforms/javascript/guides/nextjs/
+6. Neon (2026). *Neon Serverless Postgres — Getting Started*. https://neon.tech/docs/introduction
+7. Tailscale (2026). *Tailscale Funnel*. https://tailscale.com/kb/1223/funnel
+8. IEC 62446-1:2016, *Grid-connected photovoltaic systems — Minimum requirements for system documentation*. Geneva: IEC.

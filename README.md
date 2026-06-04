@@ -156,7 +156,7 @@ SMMF = [∫E_test(λ)·SR_ref(λ)dλ / ∫E_ref(λ)·SR_ref(λ)dλ] /
 
 ### IAM — Martin-Ruiz Model (IEC 61853-2)
 ```
-IAM(θ) = 1 - exp(-cos(θ)/ar) / (1 - exp(-1/ar))
+IAM(θ) = (1 − exp(−cos θ / ar)) / (1 − exp(−1/ar))
 ```
 
 ---

@@ -256,7 +256,7 @@ GET  /api/ai/conversations/:sessionId
 {
   "sessionId": "clx-sess-001",
   "moduleId": "clx-m-042",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "message": "Explain why Isc dropped 6% after the last sweep."
 }
 ```
@@ -316,4 +316,14 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+## References
+
+1. IEC 60891:2021, *Photovoltaic devices — Procedures for temperature and irradiance corrections to measured I-V characteristics*. Geneva: IEC.
+2. IEC 60904-7:2019, *Computation of the spectral mismatch correction for measurements of photovoltaic devices*. Geneva: IEC.
+3. IEC 61853-2:2016, *Photovoltaic (PV) module performance testing and energy rating — Part 2: Spectral responsivity, incidence angle and module operating temperature measurements*. Geneva: IEC.
+4. Anthropic (2026). *Claude API Reference*. https://docs.anthropic.com/en/api/
+5. Nottingham, M., & Wilde, E. (2016). RFC 7807: Problem Details for HTTP APIs. IETF. https://datatracker.ietf.org/doc/html/rfc7807
+
+---
+
+*Updated 2026-06-04. Applies to API version shipped with commit 3031b05. Update alongside any change to route handlers.*

@@ -218,10 +218,12 @@ devices maximum). Use a CP2102 USB-RS485 adapter for the PC endpoint.
 
 ---
 
-## 9. Further reading
+## 9. References
 
-* ESL-Solar 500 User Manual (PDF distributed with the unit).
-* IEC 62446-1:2016 *Grid-connected PV systems — Minimum requirements for
-  system documentation, commissioning tests, and inspection.*
-* IEC 61730-1/2:2023 *PV module safety qualification.*
-* IEEE 1547:2018 *Standard for Interconnecting Distributed Resources.*
+1. IEC 62446-1:2016, *Grid-connected photovoltaic systems — Minimum requirements for system documentation, commissioning tests, and inspection*. Geneva: IEC.
+2. IEC 61730-1:2023 / IEC 61730-2:2023, *Photovoltaic (PV) module safety qualification — Part 1: Requirements for construction; Part 2: Requirements for testing*. Geneva: IEC.
+3. IEEE 1547:2018, *Standard for Interconnection and Interoperability of Distributed Energy Resources with Associated Electric Power Systems Interfaces*. New York: IEEE.
+4. IEC 61010-1:2010+AMD1:2016+AMD2:2019, *Safety requirements for electrical equipment for measurement, control, and laboratory use — Part 1: General requirements*. Geneva: IEC.
+5. Omron Corporation (2022). *G9EA-1-B High-Capacity Power Relay — Datasheet*. 250 V AC/DC, 100 A rated.
+6. Kipp & Zonen B.V. (2021). *SMP10 Secondary Standard Pyranometer Instruction Manual*.
+7. ET SolarPower (2023). *ESL-Solar 500 Programmable PV Electronic Load User Manual*. Rev. ≥ 1.12. Distributed with the unit.
