@@ -256,7 +256,7 @@ GET  /api/ai/conversations/:sessionId
 {
   "sessionId": "clx-sess-001",
   "moduleId": "clx-m-042",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "message": "Explain why Isc dropped 6% after the last sweep."
 }
 ```
@@ -316,4 +316,4 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+*Generated 2026-04-17; last reviewed 2026-06-05. Update alongside any change to route handlers.*
