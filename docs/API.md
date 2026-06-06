@@ -20,7 +20,8 @@ Complete reference for the REST/JSON endpoints exposed by the Next.js app under
 7. [MUX Matrix Control](#mux-matrix-control)
 8. [Reports](#reports)
 9. [AI Diagnostics](#ai-diagnostics)
-10. [Library API (internal)](#library-api-internal)
+10. [Health Check](#health-check)
+11. [Library API (internal)](#library-api-internal)
 
 ---
 
@@ -32,7 +33,7 @@ POST /api/auth/login
 
 | Field    | Type    | Required | Notes                        |
 | -------- | ------- | -------- | ---------------------------- |
-| email    | string  | yes      | Organization-scoped          |
+| email    | string  | yes      | Organisation-scoped          |
 | password | string  | yes      | 12+ chars, case mix + digit  |
 
 Returns `200 { token, user }` or `401`. `token` is a short-lived JWT.
@@ -156,7 +157,7 @@ Response is the `CorrectionResult` record:
   "betaUsed": -0.00244,
   "rsUsed": 0.38,
   "kappaUsed": 0.0012,
-  "smmmfUsed": 1.013,
+  "smmfUsed": 1.013,
   "iamUsed": 0.963,
   "deltaI": 1.985,
   "deltaV": -0.64
@@ -256,12 +257,27 @@ GET  /api/ai/conversations/:sessionId
 {
   "sessionId": "clx-sess-001",
   "moduleId": "clx-m-042",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "message": "Explain why Isc dropped 6% after the last sweep."
 }
 ```
 
 Streams `text/event-stream` chunks.
+
+---
+
+## Health Check
+
+```
+GET /api/health
+```
+
+Returns `200 { "status": "ok", "db": "connected", "ts": "<ISO 8601>" }` when the
+application and database are reachable. Use for uptime monitoring and
+load-balancer health probes (see [`DEPLOYMENT.md §10`](./DEPLOYMENT.md)).
+
+Returns `503 { "status": "degraded", "db": "timeout" }` when the Prisma client
+cannot reach PostgreSQL within 3 seconds.
 
 ---
 
@@ -313,7 +329,8 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 | 422    | Measurement below quality threshold                  |
 | 500    | Unhandled server error (check `req_id` in response)  |
 | 502    | ESL-Solar / MUX driver timeout                       |
+| 503    | Database unavailable (see Health Check)              |
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+*Generated 2026-04-17; last reviewed 2026-06-06. Update alongside any change to route handlers.*
