@@ -50,8 +50,12 @@ In **Project Settings → Environment Variables** add:
 | `MUX_DRIVER_URL`        | Production         | `https://mux.srishti.local`             |
 | `LOG_LEVEL`             | All                | `info`                                  |
 
-**Never** commit the actual values — `.env.local` and `apps/web/.env*` are
-gitignored.
+For local setup, copy `apps/web/.env.example` to `apps/web/.env.local` and
+fill in real values there.
+
+**Never** commit the actual values. `.env.local` and other private `.env.*`
+files are gitignored, while `apps/web/.env.example` stays committed as the
+tracked template.
 
 ---
 
