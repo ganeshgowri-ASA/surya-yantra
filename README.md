@@ -55,9 +55,9 @@ surya-yantra/
 │   ├── iv-engine/            # IEC 60891 correction engine
 │   └── types/                # Shared TypeScript types
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
+│   ├── schematics/           # SVG circuit diagrams (planned — tracked in issue)
 │   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── WIRING.md             # Wiring guide (planned)
 └── docs/
     ├── PRD.md                # Product Requirements
     ├── API.md                # API Reference
