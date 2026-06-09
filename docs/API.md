@@ -316,4 +316,4 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+*Reviewed 2026-06-09. Update alongside any change to route handlers.*
