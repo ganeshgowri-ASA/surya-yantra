@@ -50,18 +50,14 @@ surya-yantra/
 │   │   ├── lib/              # Business logic
 │   │   └── prisma/           # Database schema
 │   └── desktop/              # Electron standalone app
-├── packages/
-│   ├── scpi-client/          # ESL-Solar SCPI driver
-│   ├── iv-engine/            # IEC 60891 correction engine
-│   └── types/                # Shared TypeScript types
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
-│   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── BOM.md                # Complete Bill of Materials
 └── docs/
-    ├── PRD.md                # Product Requirements
     ├── API.md                # API Reference
-    └── IEC-CORRECTIONS.md    # Standards implementation
+    ├── DEPLOYMENT.md         # Vercel + DB deployment guide
+    ├── HARDWARE-SETUP.md     # ESL-Solar 500 & MUX setup
+    ├── IEC-CORRECTIONS.md    # Standards implementation
+    └── ROADMAP.md            # Engineering & content roadmap
 ```
 
 ---
@@ -156,7 +152,7 @@ SMMF = [∫E_test(λ)·SR_ref(λ)dλ / ∫E_ref(λ)·SR_ref(λ)dλ] /
 
 ### IAM — Martin-Ruiz Model (IEC 61853-2)
 ```
-IAM(θ) = 1 - exp(-cos(θ)/ar) / (1 - exp(-1/ar))
+IAM(θ) = (1 − exp(−cos(θ)/ar)) / (1 − exp(−1/ar))
 ```
 
 ---
@@ -165,11 +161,7 @@ IAM(θ) = 1 - exp(-cos(θ)/ar) / (1 - exp(-1/ar))
 
 See [`hardware/BOM.md`](hardware/BOM.md) for complete Bill of Materials with online purchase links.
 
-See [`hardware/schematics/`](hardware/schematics/) for:
-- System overview schematic
-- MUX relay matrix wiring
-- 4-wire Kelvin connection detail
-- 19" rack layout drawing
+Hardware schematics (SVG circuit diagrams, rack layout, MUX wiring) are tracked in `hardware/schematics/` — see issue #147 for the commit timeline.
 
 ---
 
@@ -184,8 +176,8 @@ See [`hardware/schematics/`](hardware/schematics/) for:
 | Hardware | serialport (Node.js) for SCPI communication |
 | AI | Anthropic Claude + OpenAI GPT-4o |
 | Desktop | Electron 30 |
-| Deployment | Vercel (web) + GitHub Actions (CI/CD) |
-| Monorepo | Turborepo + pnpm workspaces |
+| Deployment | Vercel (web) + Electron Builder (Windows NSIS) |
+| Monorepo | pnpm workspaces |
 
 ---
 
