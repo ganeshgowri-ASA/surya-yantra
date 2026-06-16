@@ -13,9 +13,9 @@
 |-------|--------------|----------|------------|------------------|
 | Stale-draft audit | 2 | 0 stale (both kept) | — | — |
 | Heading hierarchy | 2 | 0 violations | — | — |
-| Citation coverage | 2 | 7 TODO DOIs across 2 files | 0 | #171, #173 |
-| Broken internal links | 2 | 1 ghost file reference | 0 | #172 |
-| Alt-text on figures | 2 | 1 figure placeholder, no alt-text | 0 | #170 |
+| Citation coverage | 2 | 7 TODO DOIs across 2 files | 0 | #178, #180 |
+| Broken internal links | 2 | 1 ghost file reference | 0 | #179 |
+| Alt-text on figures | 2 | 1 figure placeholder, no alt-text | 0 | #177 |
 | New seeds created | — | 2 seeds scaffolded | ✓ 2 | — |
 
 ---
@@ -64,7 +64,7 @@ followed by `## H2` and `### H3` with no skipped levels. No violations found.
 | 7 | Recharts performance benchmark — no citation exists yet |
 | 8 | India solar testing capacity — MNRE/IEA source needed |
 
-Filed as **issue #171** (citation completion sprint for ws-iv-tracing-systems).
+Filed as **issue #178** (citation completion sprint for ws-iv-tracing-systems).
 
 ### `2026-06-09-nabl-open-source-pv-lims.md` — WARNING
 
@@ -76,7 +76,7 @@ Filed as **issue #171** (citation completion sprint for ws-iv-tracing-systems).
 | 8 | NABL accredited lab count — NABL directory lookup needed |
 | 9 | Open-source LIMS comparison paper — prior art search needed |
 
-Filed as **issue #173** (citation completion sprint for nabl-open-source-pv-lims).
+Filed as **issue #180** (citation completion sprint for nabl-open-source-pv-lims).
 
 ---
 
@@ -90,7 +90,7 @@ repository (confirmed: `ls apps/web/lib/` shows only `iam.ts`, `iec60891.ts`,
 `smmf.ts`, `utils.ts`, `websocket-server.ts`).
 
 - Draft updated this pass to flag the missing file inline.
-- Filed as **issue #172** (scaffold `api-auth.ts` for WebSocket auth guard).
+- Filed as **issue #179** (scaffold `api-auth.ts` for WebSocket auth guard).
 
 ### `2026-06-09-nabl-open-source-pv-lims.md` — PASS
 
@@ -123,7 +123,7 @@ component, and via REST POST /api/corrections/p2 (post-hoc correction path)
 to the STC report output."
 ```
 
-Filed as **issue #170** (add SVG figure with alt-text to ws-iv-tracing-systems §5.3).
+Filed as **issue #177** (add SVG figure with alt-text to ws-iv-tracing-systems §5.3).
 
 ---
 
@@ -170,10 +170,10 @@ reinforce each other: the timing model is a shared cross-reference.
 
 | Issue | Title | Priority |
 |-------|-------|----------|
-| #170 | Add SVG dual-path figure with alt-text to ws-iv-tracing §5.3 | Medium |
-| #171 | Complete 4 TODO citation DOIs in ws-iv-tracing-systems | Low |
-| #172 | Scaffold `apps/web/lib/api-auth.ts` WebSocket auth guard | High (security) |
-| #173 | Complete 3 TODO citations in nabl-open-source-pv-lims | Low |
+| #177 | Add SVG dual-path figure with alt-text to ws-iv-tracing §5.3 | Medium |
+| #178 | Complete 4 TODO citation DOIs in ws-iv-tracing-systems | Low |
+| #179 | Scaffold `apps/web/lib/api-auth.ts` WebSocket auth guard | **High (security)** |
+| #180 | Complete 3 TODO citations in nabl-open-source-pv-lims | Low |
 
 ---
 
@@ -182,10 +182,9 @@ reinforce each other: the timing model is a shared cross-reference.
 - **Latest build:** `dpl_4eHxcVUjKeDbvauZ1XNiPfvZMxty` — **READY** ✓
 - **Branch:** `claude/wizardly-lovelace-wbfaql` (W24 Monday PR #160)
 - **URL:** `surya-yantra-ihhpxyir4-ganeshgowrimitsui-3250s-projects.vercel.app`
-- **Build time:** 30 s (READY at 1780976497042 ms epoch)
+- **Build time:** 30 s (READY)
 - **Production:** still undeployed — see issue #153
-- **Framework:** Next.js (auto-detected)
-- **Regions:** iad1
+- **Framework:** Next.js (auto-detected) | **Region:** iad1
 
 The preview build is green. No action required on the build itself.
 Production deployment requires merging a PR to `main` (issue #159 merge policy).
