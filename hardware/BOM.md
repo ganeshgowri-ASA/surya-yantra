@@ -157,4 +157,4 @@ Totals at the bottom. Quantities are for a single 75-module test bed.
 
 ---
 
-*Last updated 2026-04-17 · Srishti PV Lab procurement desk.*
+*Last reviewed 2026-06-09 · Srishti PV Lab procurement desk. Prices valid as of April 2026 — verify with vendor before issuing purchase orders.*
