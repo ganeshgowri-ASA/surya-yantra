@@ -374,6 +374,6 @@ model AIConversation {
   moduleId  String?
   role      String
   content   String
-  model     String    @default("claude-3-5-sonnet")
+  model     String    @default("claude-sonnet-4-6")
   createdAt DateTime  @default(now())
 }

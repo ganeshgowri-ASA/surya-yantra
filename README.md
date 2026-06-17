@@ -46,22 +46,17 @@ surya-yantra/
 ├── apps/
 │   ├── web/                  # Next.js 14 Web App (Vercel)
 │   │   ├── app/              # App Router pages
-│   │   ├── components/       # UI components
-│   │   ├── lib/              # Business logic
-│   │   └── prisma/           # Database schema
+│   │   ├── components/       # UI components (IVChart, LiveIVChart, shadcn)
+│   │   ├── lib/              # Business logic (IEC engines, WebSocket server)
+│   │   └── prisma/           # Database schema (20 models)
 │   └── desktop/              # Electron standalone app
-├── packages/
-│   ├── scpi-client/          # ESL-Solar SCPI driver
-│   ├── iv-engine/            # IEC 60891 correction engine
-│   └── types/                # Shared TypeScript types
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
-│   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── BOM.md                # Complete Bill of Materials (₹39.6 L incl. GST)
 └── docs/
-    ├── PRD.md                # Product Requirements
-    ├── API.md                # API Reference
-    └── IEC-CORRECTIONS.md    # Standards implementation
+    ├── API.md                # REST API + Library reference
+    ├── DEPLOYMENT.md         # Vercel deployment guide
+    ├── HARDWARE-SETUP.md     # Lab assembly & commissioning
+    └── IEC-CORRECTIONS.md    # IEC 60891/60904/61853 implementation notes
 ```
 
 ---
@@ -165,11 +160,7 @@ IAM(θ) = 1 - exp(-cos(θ)/ar) / (1 - exp(-1/ar))
 
 See [`hardware/BOM.md`](hardware/BOM.md) for complete Bill of Materials with online purchase links.
 
-See [`hardware/schematics/`](hardware/schematics/) for:
-- System overview schematic
-- MUX relay matrix wiring
-- 4-wire Kelvin connection detail
-- 19" rack layout drawing
+See [`docs/HARDWARE-SETUP.md`](docs/HARDWARE-SETUP.md) for rack layout, wiring diagrams (ASCII), ESL-Solar 500 setup, MUX commissioning, and the safety checklist. SVG schematics are in progress and not yet committed.
 
 ---
 
