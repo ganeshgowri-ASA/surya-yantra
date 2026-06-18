@@ -220,8 +220,34 @@ devices maximum). Use a CP2102 USB-RS485 adapter for the PC endpoint.
 
 ## 9. Further reading
 
-* ESL-Solar 500 User Manual (PDF distributed with the unit).
-* IEC 62446-1:2016 *Grid-connected PV systems — Minimum requirements for
-  system documentation, commissioning tests, and inspection.*
-* IEC 61730-1/2:2023 *PV module safety qualification.*
-* IEEE 1547:2018 *Standard for Interconnecting Distributed Resources.*
+* ET SolarPower, *ESL-Solar 500 Electronic Load User Manual*, v1.12, 2024.
+  Distributed with the unit; also available from ET SolarPower technical
+  support. (§3 SCPI command set, §5 calibration procedure, §7 safety.)
+* IEC 62446-1:2016, *Grid-connected photovoltaic systems — Minimum
+  requirements for system documentation, commissioning tests and
+  inspection. Part 1: Grid-connected systems larger than 200 Wp and up to
+  100 kWp*. Edition 1.0. Geneva: IEC. (§4.2–4.4 wiring diagram
+  requirements; §6.2 commissioning polarity and insulation tests;
+  §Annex A documentation templates.)
+* IEC 61730-1:2023, *Photovoltaic (PV) module safety qualification —
+  Part 1: Requirements for construction*. Edition 2.0. Geneva: IEC.
+* IEC 61730-2:2023, *Photovoltaic (PV) module safety qualification —
+  Part 2: Requirements for testing*. Edition 2.0. Geneva: IEC.
+  (Together 61730-1/2 define the safety and marking requirements that
+  every module in the 75-slot test bed must satisfy before connection.)
+* IEC 61010-1:2010+AMD1:2016, *Safety requirements for electrical
+  equipment for measurement, control, and laboratory use — Part 1:
+  General requirements*. Edition 3.0. Geneva: IEC. (RCD and earthing
+  requirements referenced in §2.3; arc-rated PPE category in §8.)
+* IEEE Std 1547-2018, *IEEE Standard for Interconnection and
+  Interoperability of Distributed Energy Resources with Associated
+  Electric Power Systems Interfaces*. New York: IEEE.
+  (Informative for grid-interactive test scenarios; not a normative
+  requirement for a standalone PV IV test bed.)
+* Kipp & Zonen, *SMP10 Secondary Standard Pyranometer Instruction
+  Manual*, 2022. (Modbus RTU register map, calibration certificate
+  requirements, tilt correction for non-horizontal mounting.)
+* International Metrology Institute (BIPM), *SI Brochure: The
+  International System of Units*, 9th edition, 2019.
+  (Unit conventions: W/m² for irradiance G, °C for temperature,
+  Ω for resistance throughout this codebase.)

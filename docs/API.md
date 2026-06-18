@@ -156,7 +156,7 @@ Response is the `CorrectionResult` record:
   "betaUsed": -0.00244,
   "rsUsed": 0.38,
   "kappaUsed": 0.0012,
-  "smmmfUsed": 1.013,
+  "smmfUsed": 1.013,
   "iamUsed": 0.963,
   "deltaI": 1.985,
   "deltaV": -0.64
@@ -316,4 +316,25 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+---
+
+## References
+
+1. IEC 60891:2021, *Photovoltaic devices — Procedures for temperature and
+   irradiance corrections to measured I-V characteristics*. Edition 3.0.
+   Geneva: IEC. (Defines the correction procedures exposed at
+   `/api/corrections/p1`–`/api/corrections/p4`.)
+2. IEC 60904-7:2019, *Photovoltaic devices — Part 7: Computation of the
+   spectral mismatch correction for measurements of photovoltaic devices*.
+   Edition 3.0. Geneva: IEC. (SMMF field `smmfUsed` in `CorrectionResult`;
+   `/api/corrections/smmf`.)
+3. IEC 61853-2:2016, *Photovoltaic (PV) module performance testing and
+   energy rating — Part 2: Spectral responsivity, incidence angle and module
+   operating temperature measurements*. Edition 1.0. Geneva: IEC. (IAM
+   field `iamUsed` in `CorrectionResult`; `/api/corrections/iam`.)
+4. Hardt M. et al. (2019). *Problem Details for HTTP APIs*. RFC 7807.
+   IETF. (Error response shape: `application/problem+json`.)
+5. Jones M. et al. (2015). *JSON Web Token (JWT)*. RFC 7519. IETF.
+   (Short-lived JWT issued by `POST /api/auth/login`.)
+
+*Last updated 2026-06-18. Update alongside any change to route handlers.*
