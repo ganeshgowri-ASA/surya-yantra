@@ -218,14 +218,46 @@ a real module anomaly.
 ## 5. References
 
 1. IEC 60891:2021, *Photovoltaic devices — Procedures for temperature and
-   irradiance corrections to measured I-V characteristics*.
-2. IEC 60904-3:2019, *Measurement principles for terrestrial PV devices
-   with reference spectral irradiance data*.
-3. IEC 60904-7:2019, *Computation of the spectral mismatch correction for
-   measurements of photovoltaic devices*.
-4. IEC 61853-2:2016, *Photovoltaic (PV) module performance testing and
+   irradiance corrections to measured I-V characteristics*. Edition 3.0.
+   Geneva: IEC. (Procedures 1–4 are implemented in `iec60891.ts`; Annex B
+   gives the normative uncertainty discussion referenced by `uExpandedPct`.)
+2. IEC 60904-1:2020, *Photovoltaic devices — Part 1: Measurement of
+   photovoltaic current-voltage characteristics*. Edition 3.0. Geneva: IEC.
+   (Defines the measurement geometry and spectral conditions that the
+   SMMF and IAM corrections must reproduce.)
+3. IEC 60904-3:2019, *Photovoltaic devices — Part 3: Measurement principles
+   for terrestrial photovoltaic (PV) solar devices with reference spectral
+   irradiance data*. Edition 4.0. Geneva: IEC. (The AM1.5G tabular spectrum
+   used as `E_ref` in `smmf.ts`.)
+4. IEC 60904-7:2019, *Photovoltaic devices — Part 7: Computation of the
+   spectral mismatch correction for measurements of photovoltaic devices*.
+   Edition 3.0. Geneva: IEC. (Equation and symbol definitions for SMMF;
+   implementation in `smmf.ts`.)
+5. IEC 61853-2:2016, *Photovoltaic (PV) module performance testing and
    energy rating — Part 2: Spectral responsivity, incidence angle and
-   module operating temperature measurements*.
-5. Martin N., Ruiz J.M., *Calculation of the PV modules angular losses
-   under field conditions by means of an analytical model*, Solar Energy
-   Materials & Solar Cells 70 (2001) 25–38.
+   module operating temperature measurements*. Edition 1.0. Geneva: IEC.
+   (Martin-Ruiz IAM model, Annex C effective AOI for diffuse/albedo;
+   implementation in `iam.ts`.)
+6. Martin N., Ruiz J.M. (2001). Calculation of the PV modules angular losses
+   under field conditions by means of an analytical model. *Solar Energy
+   Materials & Solar Cells*, 70(1), 25–38.
+   https://doi.org/10.1016/S0927-0248(00)00408-6
+   (Original derivation of the Martin-Ruiz model; source of the recommended
+   `ar = 0.16–0.17` range for glass-covered c-Si modules.)
+7. Ransome S., Sutterlueti J. (2011). Choosing the best simplified correction
+   methods for outdoor PV modelling. In *Proceedings of the 26th European
+   Photovoltaic Solar Energy Conference*, Hamburg, Germany, pp. 3465–3470.
+   (Comparative evaluation of P1 vs P2 accuracy across irradiance ranges;
+   supports the `|ΔG| > 200 W/m²` threshold for preferring P2.)
+8. JCGM 100:2008, *Evaluation of measurement data — Guide to the expression
+   of uncertainty in measurement (GUM)*. Joint Committee for Guides in
+   Metrology. (Framework for the `uExpandedPct` budget in
+   `CorrectionResult`; see also IEC 60891:2021 Annex B and issue #176.)
+9. ISO/IEC 17025:2017, *General requirements for the competence of testing
+   and calibration laboratories*. Edition 3.0. Geneva: ISO/IEC. (§7.6
+   requires expanded uncertainty on every test result; this drives the
+   `uExpandedPct` and `coverageFactor` schema fields.)
+10. IEC 62446-1:2016, *Grid-connected photovoltaic systems — Minimum
+    requirements for system documentation, commissioning tests and
+    inspection*. Edition 1.0. Geneva: IEC. (Traceability requirement that
+    connects raw measurements to corrected STC values in the test report.)
