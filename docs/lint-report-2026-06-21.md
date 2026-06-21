@@ -1,0 +1,140 @@
+# Structural Lint Report — 2026-06-21 (W26 Saturday)
+
+Weekly angle: **SEO/metadata**
+
+Scan scope: `docs/`, `hardware/`, `README.md`, `apps/web/app/layout.tsx`
+
+No `drafts/` or `posts/` files were updated in the last 24 h (branch is at the main baseline; prior article commits live on unmerged preview branches — see issue #159).
+
+---
+
+## 1. Headings Hierarchy
+
+| File | Result | Notes |
+|------|--------|-------|
+| README.md | ✓ Pass | H1 → H2 only; no skipped levels |
+| docs/API.md | ✓ Pass | H1 → H2; Table of Contents anchors resolve |
+| docs/IEC-CORRECTIONS.md | ✓ Pass | H1 → H2 → H3 hierarchy correct |
+| docs/DEPLOYMENT.md | ✓ Pass | H1 → H2 hierarchy correct |
+| hardware/BOM.md | ✓ Pass | H1 → H2 hierarchy correct |
+
+---
+
+## 2. Citation Coverage
+
+| File | Citations | Status | Notes |
+|------|-----------|--------|-------|
+| docs/IEC-CORRECTIONS.md | 5 | ⚠️ Partial | IEC refs complete; Martin & Ruiz (2001) lacks DOI — new issue filed |
+| docs/API.md | 0 | ⚠️ Gap | No References section (issue #119) |
+| docs/DEPLOYMENT.md | 0 | — | Not applicable |
+| hardware/BOM.md | 0 | — | Not applicable |
+| README.md | 0 | — | Not applicable |
+
+---
+
+## 3. Broken Internal Links
+
+| File | Broken path | Tracking |
+|------|------------|----------|
+| README.md | `hardware/schematics/` | #170 |
+| README.md | `hardware/WIRING.md` | #189 |
+| README.md | `packages/scpi-client/` | #167 |
+| README.md | `packages/iv-engine/` | #167, #184 |
+| README.md | `packages/types/` | #167 |
+| README.md | `docs/PRD.md` | #188 |
+| docs/DEPLOYMENT.md §7 | `/api/health` endpoint (not implemented) | #174 |
+| docs/DEPLOYMENT.md §8 | `apps/desktop/relay` (not committed) | #186 |
+
+All tracked in existing open issues. No new issues needed for broken links.
+
+---
+
+## 4. Alt-Text on Figures
+
+No `<img>` or `![...](...)` figure references found in any scanned document. N/A.
+
+---
+
+## 5. SEO Metadata Audit (Saturday angle)
+
+### 5.1 Before this PR
+
+`apps/web/app/layout.tsx` had minimal metadata: `title`, `description`, `metadataBase`, basic `openGraph` only. Missing: `keywords`, `alternates.canonical`, `robots`, `twitter` card, `authors`, `creator`, `publisher`, `applicationName`, `category`.
+
+No `sitemap.ts` or `robots.ts` existed, so `/sitemap.xml` and `/robots.txt` returned 404.
+
+### 5.2 Auto-fixes applied in this PR
+
+| Fix | File | Closes |
+|-----|------|--------|
+| `keywords` (12 terms) | layout.tsx | — |
+| `alternates.canonical` | layout.tsx | partial #195 |
+| `robots` (index/follow + Googlebot) | layout.tsx | — |
+| Full `openGraph` (locale en_IN, siteName, url) | layout.tsx | — |
+| `twitter: { card: 'summary_large_image' }` | layout.tsx | — |
+| `authors`, `creator`, `publisher`, `applicationName`, `category` | layout.tsx | — |
+| New `sitemap.ts` → `/sitemap.xml` (5 routes) | new file | — |
+| New `robots.ts` → `/robots.txt` | new file | — |
+| Footer date stale → reviewed 2026-06-21 | docs/API.md | — |
+| Model ID `claude-opus-4-7` → `claude-opus-4-8` | docs/API.md | #192 |
+| Footer date stale → reviewed 2026-06-21 | hardware/BOM.md | — |
+
+### 5.3 Remaining SEO gaps (require human action)
+
+| Gap | Issue | Blocker |
+|----|-------|---------|
+| OG social image `/og-default.png` missing | #194 (open) | Requires design |
+| GSC verification meta tag | #196 (open) | Manual GSC registration |
+| Bing Webmaster Tools verification | #196 (open) | Manual registration |
+| `metadataBase` + canonical → custom domain | #195 (open) | DNS not yet verified |
+| JSON-LD `ScholarlyArticle` schema for article pages | #197 (new) | No article pages yet |
+
+---
+
+## 6. Vercel Deployment Status
+
+### surya-yantra
+
+| Deployment | State | Created | Branch |
+|-----------|-------|---------|--------|
+| dpl_4eHxcVUjKeDbvauZ1XNiPfvZMxty | **READY** ✓ | 2026-06-09 | claude/wizardly-lovelace-wbfaql |
+
+Latest deployment is READY. Note: no production branch target is configured (issue #166 — P0 open).
+
+### solar-lab-x
+
+| State | Count | Last READY |
+|-------|-------|------------|
+| CANCELED | 20/20 | None in last 20 | 
+
+All 20 recent SolarLabX deployments are **CANCELED**. Root cause unknown from surya-yantra scope. New issue #198 filed.
+
+---
+
+## 7. Cross-Repo Summary (week to 2026-06-21)
+
+Direct GitHub MCP access is scoped to surya-yantra only. Inferred from Vercel deployment metadata:
+
+| Repo | Last known commit | Notes |
+|------|------------------|-------|
+| SolarLabX | 2026-06-09 — strip @ts-nocheck from 22 components/ui/ files | Vercel metadata |
+| antaryami-os | 2026-05-10 | GitHub search |
+| GanitaSutra-v0 | 2026-05-08 | GitHub search |
+| GanitaSutra | 2026-05-03 | GitHub search |
+| ShilpaSutra | 2026-03-31 | GitHub search |
+
+No commits detected in any sibling repo in the last 24 h.
+
+---
+
+## 8. New Issues Filed
+
+| # | Title |
+|---|-------|
+| TBD | docs: add DOI for Martin & Ruiz (2001) in IEC-CORRECTIONS.md ref 5 |
+| TBD | P0: SolarLabX — all 20 Vercel deployments CANCELED, no production build |
+| TBD | SEO: add JSON-LD ScholarlyArticle structured data to article pages |
+
+---
+
+*Generated by automated Saturday SEO/metadata pass — 2026-06-21.*
