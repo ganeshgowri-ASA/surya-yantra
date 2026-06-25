@@ -229,3 +229,4 @@ a real module anomaly.
 5. Martin N., Ruiz J.M., *Calculation of the PV modules angular losses
    under field conditions by means of an analytical model*, Solar Energy
    Materials & Solar Cells 70 (2001) 25–38.
+   https://doi.org/10.1016/S0927-0248(00)00257-4
