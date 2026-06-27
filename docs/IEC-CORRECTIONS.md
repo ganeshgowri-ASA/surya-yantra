@@ -1,3 +1,12 @@
+---
+title: "IEC Correction Algorithms — Implementation Notes"
+description: "How Surya Yantra implements IEC 60891:2021 Procedures 1–4, IEC 60904-7 spectral mismatch factor, and IEC 61853-2 Martin-Ruiz IAM corrections for PV IV curve translation."
+keywords: ["IEC 60891", "IV curve correction", "spectral mismatch factor", "incidence angle modifier", "Martin-Ruiz IAM", "photovoltaic corrections", "SMMF", "STC translation"]
+author: "Srishti PV Lab"
+date_updated: "2026-06-27"
+tags: ["iec60891", "iec60904-7", "iec61853-2", "pv-corrections", "iv-curve", "solar-pv", "algorithms"]
+---
+
 # IEC Correction Algorithms — Implementation Notes
 
 This document describes **how** Surya Yantra implements the corrections
@@ -195,7 +204,7 @@ G_eff = G_beam·IAM(θ_beam) + G_diffuse·IAM(58°) + G_albedo·IAM(80°)
 
 ---
 
-## 4. Order of operations in `POST /api/corrections/apply`
+## 4. Order of operations in `POST /api/measurements/:id/correct`
 
 ```
 raw IV curve

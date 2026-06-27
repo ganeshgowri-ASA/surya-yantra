@@ -50,19 +50,18 @@ surya-yantra/
 │   │   ├── lib/              # Business logic
 │   │   └── prisma/           # Database schema
 │   └── desktop/              # Electron standalone app
-├── packages/
-│   ├── scpi-client/          # ESL-Solar SCPI driver
-│   ├── iv-engine/            # IEC 60891 correction engine
-│   └── types/                # Shared TypeScript types
 ├── hardware/
-│   ├── schematics/           # SVG circuit diagrams
-│   ├── BOM.md                # Complete Bill of Materials
-│   └── WIRING.md             # Wiring guide
+│   └── BOM.md                # Complete Bill of Materials
 └── docs/
-    ├── PRD.md                # Product Requirements
     ├── API.md                # API Reference
-    └── IEC-CORRECTIONS.md    # Standards implementation
+    ├── DEPLOYMENT.md         # Vercel deployment guide
+    ├── HARDWARE-SETUP.md     # Lab assembly guide
+    └── IEC-CORRECTIONS.md    # Standards implementation notes
 ```
+
+> **Planned / not yet committed:** `packages/` (scpi-client, iv-engine, types),
+> `hardware/schematics/`, `hardware/WIRING.md`, `docs/PRD.md`.
+> Track progress in GitHub Issues [#1](../../issues/1)–[#3](../../issues/3).
 
 ---
 
