@@ -1,3 +1,12 @@
+---
+title: "Surya Yantra API Reference"
+description: "Complete REST/JSON API reference for the Surya Yantra PV module IV curve tracer and test management system — endpoints, request/response shapes, error codes."
+keywords: ["PV testing API", "IV curve tracer", "IEC 60891", "SCPI REST", "solar module API", "Next.js REST", "photovoltaic LIMS"]
+author: "Srishti PV Lab"
+date_updated: "2026-06-27"
+tags: ["api", "rest", "iec60891", "iv-curve", "solar-pv", "next-js"]
+---
+
 # Surya Yantra — API Reference
 
 Complete reference for the REST/JSON endpoints exposed by the Next.js app under
@@ -256,7 +265,7 @@ GET  /api/ai/conversations/:sessionId
 {
   "sessionId": "clx-sess-001",
   "moduleId": "clx-m-042",
-  "model": "claude-opus-4-7",
+  "model": "claude-sonnet-4-6",
   "message": "Explain why Isc dropped 6% after the last sweep."
 }
 ```

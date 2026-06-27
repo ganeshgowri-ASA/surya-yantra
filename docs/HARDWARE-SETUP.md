@@ -1,3 +1,12 @@
+---
+title: "Surya Yantra Hardware Setup Guide"
+description: "Step-by-step assembly instructions for the Srishti PV Lab 75-module IV curve test bed: ESL-Solar 500 electronic load, 300-relay MUX matrix, 4-wire Kelvin harness, and environmental sensors."
+keywords: ["PV test bed setup", "ESL-Solar 500", "IV curve tracer hardware", "MUX relay matrix", "Kelvin sensing", "solar lab assembly", "IEC 61010", "Jamnagar PV lab"]
+author: "Srishti PV Lab"
+date_updated: "2026-06-27"
+tags: ["hardware", "esl-solar-500", "mux-matrix", "kelvin-sensing", "environmental-sensors", "lab-setup"]
+---
+
 # Hardware Setup Guide
 
 Step-by-step instructions for assembling the Srishti PV Lab 75-module test

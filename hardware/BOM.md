@@ -1,3 +1,12 @@
+---
+title: "Surya Yantra — Complete Bill of Materials"
+description: "India-priced BOM for a 75-module PV IV curve test bed: ESL-Solar 500 electronic load, Omron G9EA relay matrix, Kipp & Zonen pyranometer, and full wiring harness. Grand total ₹33.5 lakh + GST."
+keywords: ["PV test bed BOM", "ESL-Solar 500 price India", "solar lab bill of materials", "Omron G9EA relay", "Kipp Zonen SMP10", "IV curve tracer parts", "Jamnagar solar lab procurement"]
+author: "Srishti PV Lab procurement desk"
+date_updated: "2026-06-27"
+tags: ["bom", "procurement", "hardware", "india", "solar-pv", "iv-tracer"]
+---
+
 # Surya Yantra — Complete Bill of Materials
 
 All prices are indicative **India MRP in INR, excluding GST**, collected in
