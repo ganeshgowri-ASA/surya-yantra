@@ -32,7 +32,7 @@ POST /api/auth/login
 
 | Field    | Type    | Required | Notes                        |
 | -------- | ------- | -------- | ---------------------------- |
-| email    | string  | yes      | Organization-scoped          |
+| email    | string  | yes      | Organisation-scoped          |
 | password | string  | yes      | 12+ chars, case mix + digit  |
 
 Returns `200 { token, user }` or `401`. `token` is a short-lived JWT.
@@ -156,7 +156,7 @@ Response is the `CorrectionResult` record:
   "betaUsed": -0.00244,
   "rsUsed": 0.38,
   "kappaUsed": 0.0012,
-  "smmmfUsed": 1.013,
+  "smmfUsed": 1.013,
   "iamUsed": 0.963,
   "deltaI": 1.985,
   "deltaV": -0.64
@@ -256,7 +256,7 @@ GET  /api/ai/conversations/:sessionId
 {
   "sessionId": "clx-sess-001",
   "moduleId": "clx-m-042",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "message": "Explain why Isc dropped 6% after the last sweep."
 }
 ```
@@ -316,4 +316,4 @@ applyIamToPoa(poaDecomposition, aoiBeamDeg, { ar? }) → number
 
 ---
 
-*Generated 2026-04-17. Update alongside any change to route handlers.*
+*Updated 2026-06-28. Update alongside any change to route handlers.*
